@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 60
-  rotationSpeed: 300
+  rotationSpeed: 500
   minBounds: {x: 15, y: 1, z: 15}
   maxBounds: {x: 85, y: 40, z: 85}
 --- !u!1 &583277699
