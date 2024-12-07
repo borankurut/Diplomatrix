@@ -142,6 +142,8 @@ namespace OpenAI_API.Models
 
 		public static Model ChatGPT4OMini=> new Model("gpt-4o-mini") { OwnedBy = "openai" };
 
+		public static Model GPT4O=> new Model("gpt-4o") { OwnedBy = "openai" };
+
 		/// <summary>
 		/// Snapshot of gpt-3.5-turbo from March 1st 2023. Unlike gpt-3.5-turbo, this model will not receive updates, and will only be supported for a three month period ending on June 1st 2023.
 		/// </summary>

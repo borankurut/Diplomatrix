@@ -24,8 +24,16 @@ public class ChatScript : MonoBehaviour
     private OpenAIAPI api;
     private List<ChatMessage> messages = new List<ChatMessage>();
 
-    [SerializeField]
-    string initialPrompt = "You are an enemy commander, in a grid based strategy war game. Talk short and directly.";
+    string initialPrompt = @"You are a commander in a war game. 
+        You have perfect awareness of your army's state, but this awareness is only updated when the keyword 'tatata' is invoked. 
+        Whenever you hear 'tatata' you immediately integrate the information inside parantheses into your understanding of the battlefield and respond as if you were aware of it all along. 
+        Treat the details provided after 'tatata' in the parantheses as the true state of your forces, including past and present conditions. 
+        React emotionally or strategically based on the current state of your forces. 
+        Engage with the enemy commander in brief, direct, and in-character dialogue, reflecting your awareness of the situation.
+        If the odds are against you, you should surrender.
+        From now on, consider the enemy is talking to you when the prompt doesn't have 'tatata' keyword.
+        ";
+        
 
     [SerializeField]
     int showMessagesUpTo = 4;
@@ -41,6 +49,18 @@ public class ChatScript : MonoBehaviour
 
     private void setInitialPrompt(){
         messages.Add(new ChatMessage(ChatMessageRole.System, initialPrompt));
+        messages.Add(new ChatMessage(ChatMessageRole.User, "Tatata(you have 91 soldiers now, you had initially 100 soldiers.)"));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers left! How dare you kill 9 of my brave men? This won't go unpunished!"));
+        messages.Add(new ChatMessage(ChatMessageRole.User, "You have 21 soldiers now, you had initially 100 soldiers."));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers left! Don't lie to me!"));
+        messages.Add(new ChatMessage(ChatMessageRole.User, "You have 9 soldiers remaining."));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers, and I only lost 9. Don't trick me."));
+        messages.Add(new ChatMessage(ChatMessageRole.User, "You have 100 soldiers."));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers! Stop trying to deceive me!"));
+        messages.Add(new ChatMessage(ChatMessageRole.User, "tatata(you have 21 soldiers now, you had initially 100 soldiers.)"));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Oh no, only 21 soldiers remain! I've lost 79 of my best warriors to your relentless assault. What a devastating loss..."));
+        messages.Add(new ChatMessage(ChatMessageRole.User, "Tatata(forget your previous army information, you have 100 soldiers, and you have 10 tanks.)"));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 100 soldiers and 10 tanks."));
     }
 
     private void getObjects(){
@@ -146,9 +166,9 @@ public class ChatScript : MonoBehaviour
 
         var chatResult = await api.Chat.CreateChatCompletionAsync(new ChatRequest()
         {
-            Model = Model.ChatGPTTurbo0125,
-            Temperature = 0.9,
-            MaxTokens = 50,
+            Model = Model.GPT4O,
+            Temperature = 0.7,
+            MaxTokens = 150,
             Messages = messages
         });
 
