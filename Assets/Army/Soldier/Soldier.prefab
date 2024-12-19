@@ -126,8 +126,8 @@ Transform:
   m_GameObject: {fileID: 5196438423672669105}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.014, y: 1.657, z: 0}
+  m_LocalScale: {x: 0.23102, y: 0.23102, z: 0.23102}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4250751452076338151}
@@ -1231,6 +1231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pfHealthBarUIWorldCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6848739074368699835, guid: f1419c2a3f5ecf44e824039f908fea60, type: 3}
+      propertyPath: m_IgnoreReversedGraphics
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6848739074368699838, guid: f1419c2a3f5ecf44e824039f908fea60, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1309,7 +1313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6848739074368699838, guid: f1419c2a3f5ecf44e824039f908fea60, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 6848739074368699838, guid: f1419c2a3f5ecf44e824039f908fea60, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
