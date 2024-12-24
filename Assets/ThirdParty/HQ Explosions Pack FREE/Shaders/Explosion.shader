@@ -77,7 +77,7 @@ Shader "Explosion"
 
 		ENDCG
 	}
-	CustomEditor "ASEMaterialInspector"
+	//CustomEditor "ASEMaterialInspector"
 }
 /*ASEBEGIN
 Version=18500

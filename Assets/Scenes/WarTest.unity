@@ -675,6 +675,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4964931232973406580, guid: 88eaae1b3d66af54998cf7804e09cd60, type: 3}
   m_PrefabInstance: {fileID: 4909983724981812587}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8860126620811504197
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1314315110195867764, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: m_Name
+      value: TankProjectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083857031684646295, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.099
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.429
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.992
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710784
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.70710576
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -684,3 +745,4 @@ SceneRoots:
   - {fileID: 393956981}
   - {fileID: 763554429361040085}
   - {fileID: 850933983}
+  - {fileID: 8860126620811504197}
