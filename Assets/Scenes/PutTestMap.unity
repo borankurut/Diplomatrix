@@ -253,7 +253,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 5526747302045745860}
-  cameraController: {fileID: 475535962}
+  playerArmy: {fileID: 1245444999}
+  soldierPrefab: {fileID: 8442623690604886364, guid: b7bbbf4beb12c734f99c932d2e45a973, type: 3}
+  tankPrefab: {fileID: 7298143203796867058, guid: 88eaae1b3d66af54998cf7804e09cd60, type: 3}
 --- !u!1 &475535960
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +601,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 475535961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1245444999 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1994918062889672744, guid: c9a10a210167df643bf8d5dbe0545902, type: 3}
+  m_PrefabInstance: {fileID: 899940162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef472762040a45408080ae96a0bf9bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1519569957
 PrefabInstance:
   m_ObjectHideFlags: 0
