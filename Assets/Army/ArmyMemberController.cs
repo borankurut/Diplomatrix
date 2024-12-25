@@ -52,12 +52,16 @@ public class ArmyMemberController: MonoBehaviour
 
     void Update(){
         //Debug.Log("health: " + thisArmyMember.Health + ", state" + state);
+        handleState();
 
-        if(enemyTarget && enemyTarget.Health <= 0){
+        if(state == State.Dead)
+            return;
+
+        if(enemyTarget && enemyTarget.IsDead){
             enemyTarget = null;
         }
 
-        if(thisArmyMember.Health <= 0){
+        if(thisArmyMember.IsDead){
             state = State.Dead;
         }
 
@@ -74,13 +78,11 @@ public class ArmyMemberController: MonoBehaviour
                 state = State.Shooting;
             }
         }
-
-        handleState();
     }
 
     void handleState(){
         makeAllStateFalse();
-        if(state == State.Idle){
+        if(state == State.Idle || state == State.Dead){
             rb.isKinematic = true;
         }
 
@@ -99,6 +101,7 @@ public class ArmyMemberController: MonoBehaviour
         else if(state == State.Dead){
             animator.SetBool(deadStr, true);
             rb.isKinematic = true;
+            die();
         }
     }
 
@@ -130,7 +133,6 @@ public class ArmyMemberController: MonoBehaviour
         }
 
         else{
-            rb.velocity = Vector3.zero;
             return false;
         }
 
@@ -146,8 +148,8 @@ public class ArmyMemberController: MonoBehaviour
         foreach (Transform enemyTransform in enemies)
         {
             ArmyMember enemy = enemyTransform.GetComponent<ArmyMember>();
-            if (enemy == null || enemy.Health <= 0)
-                continue; // Skip dead or invalid enemies
+            if (enemy == null || enemy.IsDead)
+                continue;
 
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
@@ -162,11 +164,12 @@ public class ArmyMemberController: MonoBehaviour
     }
 
     public virtual void shootTarget(){
-        enemyTarget.getDamage(thisArmyMember.Damage);
+        if(enemyTarget)
+            enemyTarget.getDamage(thisArmyMember.Damage);
     }
 
     public void die(){
-        this.enabled = false;
+            Destroy(gameObject, 5f);
     }
 
 }

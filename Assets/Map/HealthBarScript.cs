@@ -23,6 +23,19 @@ public class HealthBarScript : MonoBehaviour
 
     void Start(){
         initialHealth = armyMember.Health;
+        ArmyScript myArmy = GetComponentInParent<ArmyScript>();
+        if(myArmy == null){
+            image.color = UnityEngine.Color.black;
+        }
+
+        else if(myArmy.GetArmyType() == ArmyScript.ArmyType.playerArmy){
+            image.color = UnityEngine.Color.green;
+        }
+
+        else if(myArmy.GetArmyType() == ArmyScript.ArmyType.NPCArmy){
+            image.color = UnityEngine.Color.red;
+        }
+
     }
 
     void Update()

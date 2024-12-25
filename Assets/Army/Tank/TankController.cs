@@ -48,7 +48,6 @@ public class TankController : ArmyMemberController
         }
         else
         {
-            rb.velocity = Vector3.zero;
             return false;
         }
     }

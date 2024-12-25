@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8840615164481121288}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ProjectileStartTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,9 +45,9 @@ GameObject:
   - component: {fileID: 8575177317170812021}
   - component: {fileID: 6534865749757740662}
   - component: {fileID: 5941376265281361678}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: tank
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,6 +67,7 @@ Transform:
   m_Children:
   - {fileID: 3591891164360444685}
   - {fileID: 8840615164481121288}
+  - {fileID: 5956134691898762708}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2098914101523639774
@@ -81,8 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b0ad5ab81983b4f8c37a7fb5778a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 1000
-  _damage: 10
+  _health: 400
+  _damage: 100
 --- !u!54 &1737868785542528600
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -186,6 +187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tank_tower_001
       objectReference: {fileID: 0}
+    - target: {fileID: 314791243516391282, guid: 17913fee17d29a54aa3799052ac8dfca, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1086929208665634248, guid: 17913fee17d29a54aa3799052ac8dfca, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -243,6 +248,84 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1086929208665634248, guid: 17913fee17d29a54aa3799052ac8dfca, type: 3}
   m_PrefabInstance: {fileID: 574619941504953321}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5117277369767945361
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4964931232973406580}
+    m_Modifications:
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.98946905
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.98946905
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.98946905
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.089999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8660259
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.49999925
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5763328161682454549, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: m_Name
+      value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6333219212369596776, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+      propertyPath: armyMember
+      value: 
+      objectReference: {fileID: 2098914101523639774}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+--- !u!4 &5956134691898762708 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1561702703974334789, guid: 0001b7e87eec9054b8cc8ad575d31675, type: 3}
+  m_PrefabInstance: {fileID: 5117277369767945361}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5764235021324164879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -254,6 +337,10 @@ PrefabInstance:
     - target: {fileID: 8461569225340047032, guid: 8d88930f4b5393a4b9837786cfcd4d6e, type: 3}
       propertyPath: m_Name
       value: tank_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461569225340047032, guid: 8d88930f4b5393a4b9837786cfcd4d6e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9090050537876165634, guid: 8d88930f4b5393a4b9837786cfcd4d6e, type: 3}
       propertyPath: m_RootOrder
@@ -367,6 +454,10 @@ PrefabInstance:
     - target: {fileID: 9063476708323620859, guid: 26c9254e16295904f82785b80fc26662, type: 3}
       propertyPath: m_Name
       value: tank_gun_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063476708323620859, guid: 26c9254e16295904f82785b80fc26662, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

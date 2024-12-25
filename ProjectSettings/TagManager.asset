@@ -3,12 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Tank
+  - Soldier
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ArmyMember
   - Water
   - UI
   - 

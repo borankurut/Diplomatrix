@@ -26,6 +26,8 @@ public class TankProjectileScript : MonoBehaviour
     [SerializeField]
     private float maxLifeTime = 30f;
 
+    private HashSet<Collider> alreadyDamaged = new HashSet<Collider>();
+
     void Start()
     {
         explosionCollider = gameObject.AddComponent<SphereCollider>();
@@ -47,7 +49,10 @@ public class TankProjectileScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.transform.IsChildOf(enemyArmy))
+        bool isEnemy = other.transform.IsChildOf(enemyArmy);
+        ArmyMember armyMember = other.GetComponent<ArmyMember>();
+
+        if (isEnemy && !explosionCollider.enabled && armyMember && !armyMember.IsDead)
         {
             explosionCollider.enabled = true;
             explosionParticle.Play();
@@ -63,12 +68,13 @@ public class TankProjectileScript : MonoBehaviour
             Destroy(gameObject, 8.0f);
         }
 
-        if (explosionCollider.enabled && other.transform.IsChildOf(enemyArmy))
+        if (explosionCollider.enabled && other.transform.IsChildOf(enemyArmy) && !alreadyDamaged.Contains(other))
         {
-            ArmyMember armyMember = other.GetComponent<ArmyMember>();
             if (armyMember != null)
             {
                 armyMember.getDamage(damage);
+                Debug.Log("tank dealt damage.");
+                alreadyDamaged.Add(other);
             }
         }
     }
