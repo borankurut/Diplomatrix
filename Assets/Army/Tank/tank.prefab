@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &318845820065788136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8840615164481121288}
+  m_Layer: 0
+  m_Name: ProjectileStartTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8840615164481121288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318845820065788136}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 2.091, z: 5.919}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4964931232973406580}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &7298143203796867058
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +66,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3591891164360444685}
+  - {fileID: 8840615164481121288}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2098914101523639774
@@ -113,11 +145,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1
   rotationSpeed: 0.5
-  range: 10
+  range: 20
   enemyTarget: {fileID: 0}
   state: 0
   turret: {fileID: 643163250468380193}
   turretRotationSpeed: 10
+  projectilePrefab: {fileID: 1314315110195867764, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+  projectileVelocity: 20
+  projectileStartTransform: {fileID: 8840615164481121288}
 --- !u!65 &5941376265281361678
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -137,8 +172,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.7840858, y: 2.4822857, z: 7.171551}
-  m_Center: {x: -0.031228919, y: 1.3555214, z: -0.20452465}
+  m_Size: {x: 5.666438, y: 3.5493827, z: 10.916249}
+  m_Center: {x: 0, y: 1.793239, z: 0.26820457}
 --- !u!1001 &574619941504953321
 PrefabInstance:
   m_ObjectHideFlags: 0

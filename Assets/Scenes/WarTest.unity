@@ -687,21 +687,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: TankProjectile
       objectReference: {fileID: 0}
-    - target: {fileID: 4083857031684646295, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
-      propertyPath: looping
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.099
+      value: -3.47
       objectReference: {fileID: 0}
     - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.429
+      value: 1.43
       objectReference: {fileID: 0}
     - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.992
+      value: 8.91
       objectReference: {fileID: 0}
     - target: {fileID: 4860211660212951912, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -731,6 +727,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7112312316648087701, guid: ab0734be0628aab42a189ff73db468c2, type: 3}
+      propertyPath: enemyArmy
+      value: 
+      objectReference: {fileID: 850933984}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

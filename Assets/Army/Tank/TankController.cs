@@ -11,6 +11,15 @@ public class TankController : ArmyMemberController
     [SerializeField]
     private float turretRotationSpeed;
 
+    [SerializeField]
+    GameObject projectilePrefab;
+
+    [SerializeField]
+    float projectileVelocity = 10f;
+
+    [SerializeField]
+    Transform projectileStartTransform;
+
     protected override bool followTarget()
     {
         if (enemyTarget == null)
@@ -29,7 +38,7 @@ public class TankController : ArmyMemberController
         // Turret rotation
         RotateTurretTowardsTarget(enemyTarget.transform.position);
 
-        Debug.Log("rb.velocity: " + rb.velocity);
+        //Debug.Log("rb.velocity: " + rb.velocity);
 
         if (distance > range)
         {
@@ -55,15 +64,27 @@ public class TankController : ArmyMemberController
 
         Quaternion turretTargetRotation = Quaternion.LookRotation(turretDirection);
 
-        Debug.Log(turret.rotation);
+        //Debug.Log(turret.rotation);
 
         turret.rotation = Quaternion.Slerp(turret.rotation, turretTargetRotation, turretRotationSpeed * Time.deltaTime);
     }
 
     public override void shootTarget()
     {
-        base.shootTarget();
-        Debug.Log("Tank is shooting from turret!");
+        Debug.Log("Tank shoot target is called.");
+
+        // Instantiate the projectile
+        GameObject projectile = Instantiate(projectilePrefab, projectileStartTransform.position, projectileStartTransform.rotation);
+        projectile.GetComponent<TankProjectileScript>().damage = thisArmyMember.Damage;
+        projectile.GetComponent<TankProjectileScript>().enemyArmy = thisArmy.enemyArmy;
+        
+        // Apply initial velocity to the projectile based on the tank's forward direction
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            // Apply velocity in the forward direction of the tank's rotation
+            rb.velocity = transform.forward * projectileVelocity;
+        }
     }
 }
 

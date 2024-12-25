@@ -51,9 +51,9 @@ public class ArmyMemberController: MonoBehaviour
     }
 
     void Update(){
-        Debug.Log("health: " + thisArmyMember.Health + ", state" + state);
+        //Debug.Log("health: " + thisArmyMember.Health + ", state" + state);
 
-        if(enemyTarget.Health <= 0){
+        if(enemyTarget && enemyTarget.Health <= 0){
             enemyTarget = null;
         }
 
