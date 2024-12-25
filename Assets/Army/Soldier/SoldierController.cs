@@ -6,5 +6,9 @@ using UnityEngine;
 
 public class SoldierController : ArmyMemberController
 {
-
+    protected override void die()
+    {
+        thisArmy.currentArmyInformation.soldierAmount -= 1;
+        base.die();
+    }
 }

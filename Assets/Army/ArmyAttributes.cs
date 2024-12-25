@@ -5,17 +5,15 @@ using UnityEngine;
 
 namespace Diplomatrix{
     [System.Serializable]
-    struct ArmyAttributes 
+    public struct ArmyAttributes 
     {
-        public int riffleGuyAmount;
+        public int soldierAmount;
         public int tankAmount;
         
         // other stuff, later.
-
-
+        
         public override string ToString(){
-            return $"Army:" +
-                $"(riffle men: {riffleGuyAmount}, tanks: {tankAmount})";
+            return $"(riffle men: {soldierAmount}, tanks: {tankAmount})";
         }
     }
 }

@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyArmy: {fileID: 0}
   damage: 400
-  radius: 3.3
+  radius: 2
   explosionParticle: {fileID: 9191317014818155022}
   impactParticle: {fileID: 3855595960382742259}
   modelMeshRenderer: {fileID: 412620919398535878}

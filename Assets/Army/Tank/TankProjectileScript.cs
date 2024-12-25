@@ -73,7 +73,7 @@ public class TankProjectileScript : MonoBehaviour
             if (armyMember != null)
             {
                 armyMember.getDamage(damage);
-                Debug.Log("tank dealt damage.");
+                //Debug.Log("tank dealt damage.");
                 alreadyDamaged.Add(other);
             }
         }

@@ -1131,7 +1131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 3
   rotationSpeed: 5
-  range: 5
+  range: 15
   enemyTarget: {fileID: 0}
   state: 0
 --- !u!54 &6421764202964394378

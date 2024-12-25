@@ -21,6 +21,8 @@ public class ChatScript : MonoBehaviour
     [SerializeField]
     TMP_Text outputField;
 
+    [SerializeField]
+    private float talkIntervalSeconds = 20.0f;
     private OpenAIAPI api;
     private List<ChatMessage> messages = new List<ChatMessage>();
 
@@ -38,13 +40,17 @@ public class ChatScript : MonoBehaviour
     [SerializeField]
     int showMessagesUpTo = 4;
 
-    void Start()
+    void Awake()
     {
         getObjects();
 
         createApi();
 
         setInitialPrompt();
+    }
+
+    void Start(){
+        StartCoroutine(gptTalkRoutine());
     }
 
     private void setInitialPrompt(){
@@ -59,8 +65,8 @@ public class ChatScript : MonoBehaviour
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers! Stop trying to deceive me!"));
         messages.Add(new ChatMessage(ChatMessageRole.User, "tatata(you have 21 soldiers now, you had initially 100 soldiers.)"));
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Oh no, only 21 soldiers remain! I've lost 79 of my best warriors to your relentless assault. What a devastating loss..."));
-        messages.Add(new ChatMessage(ChatMessageRole.User, "Tatata(forget your previous army information, you have 100 soldiers, and you have 10 tanks.)"));
-        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 100 soldiers and 10 tanks."));
+        messages.Add(new ChatMessage(ChatMessageRole.User, "Tatata(forget your previous army information the game will start now and you will be informed using the secret keyword.)"));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Ok, I don't have information about my army."));
     }
 
     private void getObjects(){
@@ -149,11 +155,9 @@ public class ChatScript : MonoBehaviour
         if (j > 0) {
             for (int i = j - 1; i >= 0; --i) {
                 outputField.text += messages[i] + "\n";
-                Debug.Log(messages[i]);
             }
         }
     }
-
 
     private async void getResponse(string lastPrompt){
         sendButton.interactable = false;
@@ -181,5 +185,39 @@ public class ChatScript : MonoBehaviour
 
         sendButton.interactable = true;
         fillOutputField(showMessagesUpTo);
+    }
+    private async void getResponse(){
+        sendButton.interactable = false;
+
+        var chatResult = await api.Chat.CreateChatCompletionAsync(new ChatRequest()
+        {
+            Model = Model.GPT4O,
+            Temperature = 0.7,
+            MaxTokens = 150,
+            Messages = messages
+        });
+
+        ChatMessage responseMessage = new ChatMessage();
+        responseMessage.Role = chatResult.Choices[0].Message.Role;
+        responseMessage.Content = chatResult.Choices[0].Message.Content;
+
+        messages.Add(responseMessage);
+        ChatHistory.Add(new Message("Enemy", responseMessage.Content));
+
+        sendButton.interactable = true;
+        fillOutputField(showMessagesUpTo);
+    }
+
+    public void giveSecretPrompt(string secretkey, string content){
+        messages.Add(new ChatMessage(ChatMessageRole.User, secretkey + "(" + content + ")"));
+    }
+
+    private IEnumerator gptTalkRoutine()
+    {
+        while (true)
+        {
+            getResponse();
+            yield return new WaitForSeconds(talkIntervalSeconds);
+        }
     }
 }

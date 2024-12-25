@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 400
-  _damage: 100
+  _damage: 40
 --- !u!54 &1737868785542528600
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1
   rotationSpeed: 0.5
-  range: 20
+  range: 30
   enemyTarget: {fileID: 0}
   state: 0
   turret: {fileID: 643163250468380193}

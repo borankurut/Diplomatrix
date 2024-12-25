@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(ArmyMember))]
@@ -52,10 +53,11 @@ public class ArmyMemberController: MonoBehaviour
 
     void Update(){
         //Debug.Log("health: " + thisArmyMember.Health + ", state" + state);
-        handleState();
 
         if(state == State.Dead)
             return;
+
+        handleState();
 
         if(enemyTarget && enemyTarget.IsDead){
             enemyTarget = null;
@@ -63,6 +65,7 @@ public class ArmyMemberController: MonoBehaviour
 
         if(thisArmyMember.IsDead){
             state = State.Dead;
+            handleState();
         }
 
         else if(enemyTarget == null){
@@ -168,8 +171,10 @@ public class ArmyMemberController: MonoBehaviour
             enemyTarget.getDamage(thisArmyMember.Damage);
     }
 
-    public void die(){
-            Destroy(gameObject, 5f);
+    protected virtual void die(){
+        //Debug.Log("die is called. I HOPE WORKS PLEAS");
+        
+        Destroy(gameObject, 5f);
     }
 
 }

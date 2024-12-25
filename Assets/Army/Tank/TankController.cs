@@ -31,11 +31,9 @@ public class TankController : ArmyMemberController
 
         direction.y = 0;
 
-        // Slow body rotation
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-        // Turret rotation
         RotateTurretTowardsTarget(enemyTarget.transform.position);
 
         //Debug.Log("rb.velocity: " + rb.velocity);
@@ -70,20 +68,23 @@ public class TankController : ArmyMemberController
 
     public override void shootTarget()
     {
-        Debug.Log("Tank shoot target is called.");
+        //Debug.Log("Tank shoot target is called.");
 
-        // Instantiate the projectile
         GameObject projectile = Instantiate(projectilePrefab, projectileStartTransform.position, projectileStartTransform.rotation);
         projectile.GetComponent<TankProjectileScript>().damage = thisArmyMember.Damage;
         projectile.GetComponent<TankProjectileScript>().enemyArmy = thisArmy.enemyArmy;
         
-        // Apply initial velocity to the projectile based on the tank's forward direction
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            // Apply velocity in the forward direction of the tank's rotation
             rb.velocity = transform.forward * projectileVelocity;
         }
+    }
+
+    protected override void die()
+    {
+        thisArmy.currentArmyInformation.tankAmount -= 1;
+        base.die();
     }
 }
 
