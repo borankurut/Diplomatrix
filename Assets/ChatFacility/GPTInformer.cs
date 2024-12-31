@@ -7,17 +7,17 @@ public class GPTInformer : MonoBehaviour
 {
     [SerializeField]
     private ArmyScript playerArmy;
-    private string playerTotalBefore = "";
 
     [SerializeField]
     private ArmyScript npcArmy;
-    private string npcTotalBefore = "";
 
     [SerializeField]
     private ChatScript chatScript;
 
     [SerializeField]
     private float informIntervalSeconds = 5f;
+
+    private string informMessageBefore= "";
 
     void Start()
     {
@@ -33,23 +33,26 @@ public class GPTInformer : MonoBehaviour
         }
     }
 
-    public void InformGPT()
+    static public string InformMessageArmy(ArmyScript npcArmy, ArmyScript playerArmy){
+        string informMessage = "Your army information: " + npcArmy.totalInformation()+
+                        "\n\n" + "Enemy army information: " + playerArmy.totalInformation();
+        return informMessage;
+    }
+
+    static public string InformMessageCharacteristics(Characteristics characteristics){
+        return "Your characteristics information: " + characteristics.ToString();
+    }
+
+    private void InformGPT()
     {
-        string npcTotal = npcArmy.totalInformation();
-        string playerTotal = playerArmy.totalInformation();
-        if(npcTotal == npcTotalBefore && playerTotal == playerTotalBefore){
-            Debug.Log("GPT IS NOT INFORMED BECAUSE BATTLE STATE IS STABLE");
-            return;
+        string informMessage = InformMessageArmy(npcArmy, playerArmy);
+
+        if(informMessage != informMessageBefore){
+            chatScript.giveSecretPrompt("tatata", informMessage);
+            Debug.Log($"GPT IS INFORMED WITH {informMessage}");
         }
-        string informMessage = "Your army information: " + npcTotal +
-                        "\n\n" + "Enemy army information: " + playerTotal;
-
-        chatScript.giveSecretPrompt("tatata", informMessage);
-
-        playerTotalBefore = playerTotal;
-        npcTotalBefore = npcTotal;
-
-        Debug.Log($"GPT IS INFORMED WITH {informMessage}");
-
+        else{
+            Debug.Log("GPT NOT INFORMED BECAUSE INFORMATION IS SAME.");
+        }
     }
 }

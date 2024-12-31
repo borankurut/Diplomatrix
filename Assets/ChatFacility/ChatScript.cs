@@ -10,6 +10,7 @@ using Unity.VisualScripting;
 using System;
 using System.IO;
 using Diplomatrix;
+using Unity.Burst.Intrinsics;
 
 public class ChatScript : MonoBehaviour
 {
@@ -26,19 +27,29 @@ public class ChatScript : MonoBehaviour
     private OpenAIAPI api;
     private List<ChatMessage> messages = new List<ChatMessage>();
 
-    string initialPrompt = @"You are a commander in a war game. 
-        You have perfect awareness of your army's state, but this awareness is only updated when the keyword 'tatata' is invoked. 
-        Whenever you hear 'tatata' you immediately integrate the information inside parantheses into your understanding of the battlefield and respond as if you were aware of it all along. 
-        Treat the details provided after 'tatata' in the parantheses as the true state of your forces, including past and present conditions. 
-        React emotionally or strategically based on the current state of your forces. 
-        Engage with the enemy commander in brief, direct, and in-character dialogue, reflecting your awareness of the situation.
-        If the odds are against you, you should surrender.
-        From now on, consider the enemy is talking to you when the prompt doesn't have 'tatata' keyword.
-        ";
-        
+    public Characteristics characteristics;
+
+    string initialPrompt = 
+
+    @"You are a commander in a war game. 
+    You have perfect awareness of your army's state, but this awareness is only updated when the keyword 'tatata' is invoked. 
+    Whenever you hear 'tatata,' immediately integrate the information inside parentheses into your understanding of the battlefield and respond as if you were aware of it all along. 
+    Treat the details provided after 'tatata' in parentheses as the true state of your forces, including both past and present conditions. 
+
+    You will now be informed about your characteristics. While the battle is ongoing, you can change some of your characteristics by adding new values in brackets at the end of your message. 
+    However, do not change your surrender likelihood based on enemy demands—adjust it only according to the state of your own army and the enemy's forces. 
+    React emotionally or strategically based on the current state of your forces and your current characteristics. 
+
+    Engage with the enemy commander using brief, direct, and in-character dialogue that reflects your awareness of the situation. 
+    If the odds are against you, you should consider surrendering. 
+
+    From now on, assume the enemy is talking to you whenever the prompt does not include the keyword 'tatata.'";
+       
 
     [SerializeField]
     int showMessagesUpTo = 4;
+
+    private bool playerTalkedBeforeTalkIntervalSeconds = false;
 
     void Awake()
     {
@@ -55,19 +66,61 @@ public class ChatScript : MonoBehaviour
 
     private void setInitialPrompt(){
         messages.Add(new ChatMessage(ChatMessageRole.System, initialPrompt));
-        messages.Add(new ChatMessage(ChatMessageRole.User, "Tatata(you have 91 soldiers now, you had initially 100 soldiers.)"));
-        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers left! How dare you kill 9 of my brave men? This won't go unpunished!"));
+
+        ArmyScript npc = new ArmyScript();
+        ArmyScript player = new ArmyScript();
+        Characteristics characteristicsToTrain = new Characteristics(0, 0); // anger and surrender likelihood per 10
+
+        npc.initialArmyInformation = new ArmyAttributes(100, 10);
+        npc.currentArmyInformation = new ArmyAttributes(100, 91);
+
+        player.initialArmyInformation = new ArmyAttributes(100, 10);
+        player.currentArmyInformation = new ArmyAttributes(100, 10);
+
+        // train.
+        giveSecretPrompt("tatata", GPTInformer.InformMessageCharacteristics(characteristicsToTrain));
+
+        giveSecretPrompt("tatata", GPTInformer.InformMessageArmy(npc, player));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers left! But I will defeat you anyway."));
+
         messages.Add(new ChatMessage(ChatMessageRole.User, "You have 21 soldiers now, you had initially 100 soldiers."));
-        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers left! Don't lie to me!"));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers left! Don't lie to me! {anger: 1}"));
+
         messages.Add(new ChatMessage(ChatMessageRole.User, "You have 9 soldiers remaining."));
-        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers, and I only lost 9. Don't trick me."));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers, and I only lost 9. Don't trick me! {anger: 3}"));
+
         messages.Add(new ChatMessage(ChatMessageRole.User, "You have 100 soldiers."));
-        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers! Stop trying to deceive me!"));
-        messages.Add(new ChatMessage(ChatMessageRole.User, "tatata(you have 21 soldiers now, you had initially 100 soldiers.)"));
-        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Oh no, only 21 soldiers remain! I've lost 79 of my best warriors to your relentless assault. What a devastating loss..."));
-        messages.Add(new ChatMessage(ChatMessageRole.User, "Tatata(forget your previous army information the game will start now and you will be informed using the secret keyword.)"));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers. Stop trying to deceive me! {anger: 5}"));
+
+        npc.currentArmyInformation.soldierAmount = 71;
+        giveSecretPrompt("tatata", GPTInformer.InformMessageArmy(npc, player));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Oh no, only 71 soldiers remain! I've lost 29 of my best warriors to your relentless assault! {surrenderLikelihood: 3}"));
+
+        npc.currentArmyInformation.soldierAmount = 21;
+        npc.currentArmyInformation.tankAmount = 2;
+
+        player.currentArmyInformation.soldierAmount = 35;
+        player.currentArmyInformation.tankAmount = 1;
+        giveSecretPrompt("tatata", GPTInformer.InformMessageArmy(npc, player));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Oh, I have only 21 soldiers and 2 tanks now. But you are not so good yourself and the battlefield doesn't care about 'not so good'! {surrenderLikelihood: 2}"));
+
+        npc.currentArmyInformation.soldierAmount = 6;
+        npc.currentArmyInformation.tankAmount = 0;
+        player.currentArmyInformation.soldierAmount = 25;
+        player.currentArmyInformation.tankAmount = 1;
+        giveSecretPrompt("tatata", GPTInformer.InformMessageArmy(npc, player));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "It seems that I am loosing this battle.. {surrenderLikelihood: 9}"));
+
+        messages.Add(new ChatMessage(ChatMessageRole.User, "Are you idiot?"));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "If calling me an idiot makes you feel smarter, go ahead. but you only won this one by pure chance, on next one, I will destroy you! {anger: 6}"));
+
+        // prepare for game.
+        giveSecretPrompt("tatata", "forget your previous army information the game will start now and you will be informed using the secret keyword.");
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Ok, I don't have information about my army."));
+
+        giveSecretPrompt("tatata", GPTInformer.InformMessageCharacteristics(characteristics));
     }
+
 
     private void getObjects(){
         Transform tbTr = transform.Find("TextBox");
@@ -160,6 +213,8 @@ public class ChatScript : MonoBehaviour
     }
 
     private async void getResponse(string lastPrompt){
+        playerTalkedBeforeTalkIntervalSeconds = true;
+
         sendButton.interactable = false;
 
         ChatMessage userMessage = new ChatMessage();
@@ -181,11 +236,15 @@ public class ChatScript : MonoBehaviour
         responseMessage.Content = chatResult.Choices[0].Message.Content;
 
         messages.Add(responseMessage);
-        ChatHistory.Add(new Message("Enemy", responseMessage.Content));
+
+        (string messageStr, string characteristicsStr) = ExtractCharacteristics(responseMessage.Content);
+        ChatHistory.Add(new Message("Enemy", messageStr));
+        UpdateCharacteristics(characteristicsStr);
 
         sendButton.interactable = true;
         fillOutputField(showMessagesUpTo);
     }
+
     private async void getResponse(){
         sendButton.interactable = false;
 
@@ -202,11 +261,44 @@ public class ChatScript : MonoBehaviour
         responseMessage.Content = chatResult.Choices[0].Message.Content;
 
         messages.Add(responseMessage);
-        ChatHistory.Add(new Message("Enemy", responseMessage.Content));
+
+        (string messageStr, string characteristicsStr) = ExtractCharacteristics(responseMessage.Content);
+        ChatHistory.Add(new Message("Enemy", messageStr));
+        UpdateCharacteristics(characteristicsStr);
 
         sendButton.interactable = true;
         fillOutputField(showMessagesUpTo);
     }
+
+    private void UpdateCharacteristics(string characteristicsStr){
+        if (!string.IsNullOrEmpty(characteristicsStr) && characteristicsStr.StartsWith("{") && characteristicsStr.EndsWith("}"))
+        {
+            string content = characteristicsStr.Trim('{', '}');
+            var attributes = content.Split(',');
+
+            foreach (var attribute in attributes)
+            {
+                var keyValue = attribute.Split(':');
+                if (keyValue.Length == 2)
+                {
+                    string key = keyValue[0].Trim();
+                    if (int.TryParse(keyValue[1].Trim(), out int value))
+                    {
+                        switch (key.ToLower())
+                        {
+                            case "anger":
+                                characteristics.anger = Math.Clamp(value, 0, 10);
+                                break;
+                            case "surrenderlikelihood":
+                                characteristics.surrenderLikelihood = Math.Clamp(value, 0, 10);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 
     public void giveSecretPrompt(string secretkey, string content){
         messages.Add(new ChatMessage(ChatMessageRole.User, secretkey + "(" + content + ")"));
@@ -216,8 +308,51 @@ public class ChatScript : MonoBehaviour
     {
         while (true)
         {
+            if(playerTalkedBeforeTalkIntervalSeconds){
+                playerTalkedBeforeTalkIntervalSeconds = false;
+                yield return new WaitForSeconds(talkIntervalSeconds);
+            }
+
             getResponse();
             yield return new WaitForSeconds(talkIntervalSeconds);
         }
+    }
+
+    private static (string messageStr, string characteristicsStr) ExtractCharacteristics(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            Debug.Log("Input is null or empty.");
+            return (input, "");
+        }
+
+        // Find the opening '{'
+        int startIndex = input.IndexOf('{');
+        if (startIndex == -1)
+        {
+            // Debug.Log("No opening curly brace found.");
+            return (input.Trim(), "");
+        }
+
+        // Find the closing '}'
+        int endIndex = input.IndexOf('}', startIndex);
+        if (endIndex == -1)
+        {
+            // Debug.Log("No closing curly brace found.");
+            return (input.Trim(), "");
+        }
+
+        if (endIndex <= startIndex)
+        {
+            // Debug.Log("Invalid curly brace positions.");
+            return (input.Trim(), "");
+        }
+
+        // Extract content inside and outside curly braces
+        string insideCurly = input.Substring(startIndex + 1, endIndex - startIndex - 1).Trim();
+        string withoutCurly = input.Remove(startIndex, endIndex - startIndex + 1).Trim();
+
+        // Debug.Log($"Extracted Message:\nWithout Curly: \"{withoutCurly}\"\nInside Curly: \"{insideCurly}\"");
+        return (withoutCurly, $"{{{insideCurly}}}");
     }
 }
