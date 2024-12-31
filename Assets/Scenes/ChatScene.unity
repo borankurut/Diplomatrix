@@ -127,38 +127,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6498259846275699571, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
   m_PrefabInstance: {fileID: 4538419485948612873}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &221841098 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6281577934806671322, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-  m_PrefabInstance: {fileID: 4538419485948612873}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &221841099 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1279841056711151300, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-  m_PrefabInstance: {fileID: 4538419485948612873}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221841098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffbef0bc675fa4945865c5b523e1a8b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &221841100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221841098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d438e7ee056bd409e41d656aa6b2c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerArmy: {fileID: 857498575}
-  npcArmy: {fileID: 1751465771}
-  chatScript: {fileID: 221841099}
-  informIntervalSeconds: 5
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,26 +643,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1310141076}
     m_Modifications:
-    - target: {fileID: 97098372233359683, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 97098372233359683, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 97098372233359683, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1279841056711151300, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: talkIntervalSeconds
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1279841056711151300, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: characteristics.surrenderLikelihood
-      value: 5
-      objectReference: {fileID: 0}
+    - target: {fileID: 1154817992862111742, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
+      propertyPath: npcArmy
+      value: 
+      objectReference: {fileID: 1751465771}
+    - target: {fileID: 1154817992862111742, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
+      propertyPath: playerArmy
+      value: 
+      objectReference: {fileID: 857498575}
     - target: {fileID: 2921522764266907746, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -794,10 +750,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6281577934806671322, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 221841100}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -19,15 +19,20 @@ public class ArmyScript : MonoBehaviour
     public ArmyType GetArmyType(){return armyType;}
 
     public ArmyAttributes initialArmyInformation;
-    public ArmyAttributes currentArmyInformation;
+    public ArmyAttributes atHandArmyInformation;
+    public ArmyAttributes atBattlefieldArmyInformation;
 
     void Awake(){
-        currentArmyInformation = initialArmyInformation;
+        atHandArmyInformation = initialArmyInformation;
+    }
+
+    public ArmyAttributes currentArmyInformation(){
+        return new ArmyAttributes(atHandArmyInformation.soldierAmount + atBattlefieldArmyInformation.soldierAmount, 
+            atHandArmyInformation.tankAmount + atBattlefieldArmyInformation.tankAmount);
     }
 
     public string totalInformation(){
         return "Initial Army: " + initialArmyInformation.ToString() + "\n" +
-                "Current Army: " + currentArmyInformation.ToString(); 
+                "Current Army: " + currentArmyInformation().ToString(); 
     }
-    
 }

@@ -49,10 +49,10 @@ public class GPTInformer : MonoBehaviour
 
         if(informMessage != informMessageBefore){
             chatScript.giveSecretPrompt("tatata", informMessage);
-            Debug.Log($"GPT IS INFORMED WITH {informMessage}");
+            // Debug.Log($"GPT IS INFORMED WITH {informMessage}");
         }
         else{
-            Debug.Log("GPT NOT INFORMED BECAUSE INFORMATION IS SAME.");
+            // Debug.Log("GPT NOT INFORMED BECAUSE INFORMATION IS SAME.");
         }
     }
 }

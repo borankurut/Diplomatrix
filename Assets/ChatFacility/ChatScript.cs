@@ -72,10 +72,10 @@ public class ChatScript : MonoBehaviour
         Characteristics characteristicsToTrain = new Characteristics(0, 0); // anger and surrender likelihood per 10
 
         npc.initialArmyInformation = new ArmyAttributes(100, 10);
-        npc.currentArmyInformation = new ArmyAttributes(100, 91);
+        npc.atHandArmyInformation = new ArmyAttributes(100, 91);
 
         player.initialArmyInformation = new ArmyAttributes(100, 10);
-        player.currentArmyInformation = new ArmyAttributes(100, 10);
+        player.atHandArmyInformation = new ArmyAttributes(100, 10);
 
         // train.
         giveSecretPrompt("tatata", GPTInformer.InformMessageCharacteristics(characteristicsToTrain));
@@ -92,22 +92,22 @@ public class ChatScript : MonoBehaviour
         messages.Add(new ChatMessage(ChatMessageRole.User, "You have 100 soldiers."));
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers. Stop trying to deceive me! {anger: 5}"));
 
-        npc.currentArmyInformation.soldierAmount = 71;
+        npc.atHandArmyInformation.soldierAmount = 71;
         giveSecretPrompt("tatata", GPTInformer.InformMessageArmy(npc, player));
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Oh no, only 71 soldiers remain! I've lost 29 of my best warriors to your relentless assault! {surrenderLikelihood: 3}"));
 
-        npc.currentArmyInformation.soldierAmount = 21;
-        npc.currentArmyInformation.tankAmount = 2;
+        npc.atHandArmyInformation.soldierAmount = 21;
+        npc.atHandArmyInformation.tankAmount = 2;
 
-        player.currentArmyInformation.soldierAmount = 35;
-        player.currentArmyInformation.tankAmount = 1;
+        player.atHandArmyInformation.soldierAmount = 35;
+        player.atHandArmyInformation.tankAmount = 1;
         giveSecretPrompt("tatata", GPTInformer.InformMessageArmy(npc, player));
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Oh, I have only 21 soldiers and 2 tanks now. But you are not so good yourself and the battlefield doesn't care about 'not so good'! {surrenderLikelihood: 2}"));
 
-        npc.currentArmyInformation.soldierAmount = 6;
-        npc.currentArmyInformation.tankAmount = 0;
-        player.currentArmyInformation.soldierAmount = 25;
-        player.currentArmyInformation.tankAmount = 1;
+        npc.atHandArmyInformation.soldierAmount = 6;
+        npc.atHandArmyInformation.tankAmount = 0;
+        player.atHandArmyInformation.soldierAmount = 25;
+        player.atHandArmyInformation.tankAmount = 1;
         giveSecretPrompt("tatata", GPTInformer.InformMessageArmy(npc, player));
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "It seems that I am loosing this battle.. {surrenderLikelihood: 9}"));
 

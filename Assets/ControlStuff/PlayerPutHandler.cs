@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerPutHandler : MonoBehaviour
 {
     [SerializeField]
-    private Terrain terrain;
+    private TerrainGrids terrainGrids;
 
     [SerializeField]
     enum Selection {Unknown, Soldier, Tank};
@@ -47,14 +47,19 @@ public class PlayerPutHandler : MonoBehaviour
         bool rayHit = Physics.Raycast(ray, out RaycastHit hit);
         bool hitToTerrain = false;
         if(rayHit)
-            hitToTerrain = hit.collider.gameObject == terrain.gameObject;     
+            hitToTerrain = hit.collider.gameObject == terrainGrids.gameObject;     
 
         if(!hitToTerrain){
             return;
         }
 
+        if(!terrainGrids.IsValidCoordinate(hit.point)){
+            Debug.Log("Trying to put somewhere outside the map.");
+            return;
+        }
+
         if(selection == Selection.Soldier){
-            if(playerArmy.currentArmyInformation.soldierAmount <= 0){ // TODO: make another army informaiton for remaining, this is wrong.
+            if(playerArmy.atHandArmyInformation.soldierAmount <= 0){ // TODO: make another army informaiton for remaining, this is wrong.
                 Debug.Log("Not enough soldiers");
             }
 
@@ -62,11 +67,13 @@ public class PlayerPutHandler : MonoBehaviour
                 GameObject addedSoldier = Instantiate(soldierPrefab);
                 addedSoldier.transform.position = hit.point;
                 addedSoldier.transform.SetParent(playerArmy.transform, true);
+                playerArmy.atHandArmyInformation.soldierAmount -= 1;
+                playerArmy.atBattlefieldArmyInformation.soldierAmount += 1;
             }
         }
 
         if(selection == Selection.Tank){
-            if(playerArmy.currentArmyInformation.tankAmount <= 0){
+            if(playerArmy.atHandArmyInformation.tankAmount <= 0){
                 Debug.Log("Not enough tanks");
             }
 
@@ -74,6 +81,8 @@ public class PlayerPutHandler : MonoBehaviour
                 GameObject addedTank = Instantiate(tankPrefab);
                 addedTank.transform.position = hit.point;
                 addedTank.transform.SetParent(playerArmy.transform, true);
+                playerArmy.atHandArmyInformation.tankAmount -= 1;
+                playerArmy.atBattlefieldArmyInformation.tankAmount += 1;
             }
         }
 
@@ -96,4 +105,5 @@ public class PlayerPutHandler : MonoBehaviour
 
         return "NULL";
     }
+
 }

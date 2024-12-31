@@ -454,7 +454,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: -170}
+  m_AnchoredPosition: {x: -50, y: -161.6}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6572219778271878176
@@ -561,7 +561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.8, y: -238}
+  m_AnchoredPosition: {x: -17.8, y: -227.1}
   m_SizeDelta: {x: 40, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4313868900528075608
@@ -828,7 +828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -121, y: -239}
+  m_AnchoredPosition: {x: -121, y: -228}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3865549149478401938
@@ -1255,6 +1255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6498259846275699571}
   - component: {fileID: 1279841056711151300}
+  - component: {fileID: 1154817992862111742}
   m_Layer: 5
   m_Name: ChatObject
   m_TagString: Untagged
@@ -1297,7 +1298,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outputField: {fileID: 6897284638997644968}
+  talkIntervalSeconds: 10
+  characteristics:
+    anger: 0
+    surrenderLikelihood: 5
   showMessagesUpTo: 10
+--- !u!114 &1154817992862111742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6281577934806671322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d438e7ee056bd409e41d656aa6b2c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerArmy: {fileID: 0}
+  npcArmy: {fileID: 0}
+  chatScript: {fileID: 1279841056711151300}
+  informIntervalSeconds: 5
 --- !u!1 &6836079342211903067
 GameObject:
   m_ObjectHideFlags: 0

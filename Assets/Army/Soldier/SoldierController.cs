@@ -10,7 +10,7 @@ public class SoldierController : ArmyMemberController
     private ParticleSystem fireParticle;
     protected override void die()
     {
-        thisArmy.currentArmyInformation.soldierAmount -= 1;
+        thisArmy.atBattlefieldArmyInformation.soldierAmount -= 1;
         base.die();
     }
 

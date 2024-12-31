@@ -20,6 +20,9 @@ public class TankController : ArmyMemberController
     [SerializeField]
     Transform projectileStartTransform;
 
+    [SerializeField]
+    ParticleSystem smokeParticle;
+
     protected override bool followTarget()
     {
         if (enemyTarget == null)
@@ -83,7 +86,8 @@ public class TankController : ArmyMemberController
 
     protected override void die()
     {
-        thisArmy.currentArmyInformation.tankAmount -= 1;
+        smokeParticle.Play();
+        thisArmy.atBattlefieldArmyInformation.tankAmount -= 1;
         base.die();
     }
 }
