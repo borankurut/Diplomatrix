@@ -27,7 +27,7 @@ public class EnemyPutHandler : PutHandler
 
     private IEnumerator PutSoldierRoutine(){
         while(true){
-            Put(Selection.Soldier, terrainGrids.GetRandomValidPoint(), enemyArmy);
+            Put(Selection.Soldier, terrainGrids.GetRandomValidPointForEnemy(), enemyArmy);
             Debug.Log("attackperiod soldier: " + attackPattern.getSoldierAttackPeriod());
             yield return new WaitForSeconds(attackPattern.getSoldierAttackPeriod());
         }
@@ -35,7 +35,7 @@ public class EnemyPutHandler : PutHandler
 
     private IEnumerator PutTankRoutine(){
         while(true){
-            Put(Selection.Tank, terrainGrids.GetRandomValidPoint(), enemyArmy);
+            Put(Selection.Tank, terrainGrids.GetRandomValidPointForEnemy(), enemyArmy);
             yield return new WaitForSeconds(attackPattern.getTankAttackPeriod());
         }
     }

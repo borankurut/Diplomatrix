@@ -114,4 +114,13 @@ public class TerrainGrids : MonoBehaviour
 
         return new Vector3(randomX, y, randomZ);
     }
+
+    public Vector3 GetRandomValidPointForEnemy()
+    {
+        float randomX = Random.Range(innerMinX, innerMaxX);
+        float y = 0.0f;
+        float randomZ = Random.Range( ((innerMaxZ - innerMinZ) / 2.0f) + innerMinZ, innerMaxZ);
+
+        return new Vector3(randomX, y, randomZ);
+    }
 }
