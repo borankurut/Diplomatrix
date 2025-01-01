@@ -33,6 +33,8 @@ public class ArmyScript : MonoBehaviour
 
     public string totalInformation(){
         return "Initial Army: " + initialArmyInformation.ToString() + "\n" +
-                "Current Army: " + currentArmyInformation().ToString(); 
+                "At Your Hand: " + atHandArmyInformation.ToString() + "\n" +
+                "At BattleField: " + atBattlefieldArmyInformation.ToString() + "\n" + 
+                "Current Total: " + currentArmyInformation().ToString();
     }
 }
