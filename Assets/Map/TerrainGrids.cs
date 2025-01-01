@@ -68,6 +68,27 @@ public class TerrainGrids : MonoBehaviour
                point.z >= innerMinZ && point.z <= innerMaxZ;
     }
 
+    public bool IsValidInsideEnemySide(Vector3 point)
+    {
+        return  point.x <= innerMaxX && point.x >= innerMinX &&
+                point.y >= 0.0f &&
+                point.z <= innerMaxZ && 
+                point.z >= innerMinZ + halfWayDistanceZ();
+    }
+
+    public bool IsValidInsidePlayerSide(Vector3 point)
+    {
+        return  point.x <= innerMaxX && point.x >= innerMinX &&
+                point.y >= 0.0f &&
+                point.z <= innerMinZ + halfWayDistanceZ() &&
+                point.z >= innerMinZ;
+    }
+
+    private float halfWayDistanceZ(){
+        return ((innerMaxZ - innerMinZ) / 2.0f);
+    }
+    
+
     private void RecalculateGridBounds()
     {
         if (terrain == null) return;
@@ -119,7 +140,7 @@ public class TerrainGrids : MonoBehaviour
     {
         float randomX = Random.Range(innerMinX, innerMaxX);
         float y = 0.0f;
-        float randomZ = Random.Range( ((innerMaxZ - innerMinZ) / 2.0f) + innerMinZ, innerMaxZ);
+        float randomZ = Random.Range(innerMinZ + halfWayDistanceZ(), innerMaxZ);
 
         return new Vector3(randomX, y, randomZ);
     }

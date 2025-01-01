@@ -41,8 +41,17 @@ public class PutHandler : MonoBehaviour
     }
 
     protected void Put(Selection selection, Vector3 position, ArmyScript army){
-        if(!terrainGrids.IsValidCoordinate(position)){
-            Debug.Log("Trying to put somewhere outside the map.");
+        if(army.GetArmyType() == ArmyScript.ArmyType.playerArmy && 
+            !terrainGrids.IsValidInsidePlayerSide(position))
+        {
+            Debug.Log("Player is trying to put somewhere outside the map.");
+            return;
+        }
+
+        if(army.GetArmyType() == ArmyScript.ArmyType.NPCArmy && 
+            !terrainGrids.IsValidInsideEnemySide(position))
+        {
+            Debug.Log("Enemy is trying to put somewhere outside the map.");
             return;
         }
 
