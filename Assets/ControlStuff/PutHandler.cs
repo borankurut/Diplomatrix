@@ -47,13 +47,22 @@ public class PutHandler : MonoBehaviour
         }
 
         if(selection == Selection.Soldier){
+
+            if(army.atHandArmyInformation.soldierAmount <= 0)
+                return;
+
             GameObject addedSoldier = Instantiate(soldierPrefab);
             addedSoldier.transform.position = position;
             addedSoldier.transform.SetParent(army.transform, true);
             army.atHandArmyInformation.soldierAmount -= 1;
             army.atBattlefieldArmyInformation.soldierAmount += 1;
         }
+
         else if(selection == Selection.Tank){
+
+            if(army.atHandArmyInformation.tankAmount <= 0)
+                return;
+
             GameObject addedTank = Instantiate(tankPrefab);
             addedTank.transform.position = position;
             addedTank.transform.SetParent(army.transform, true);

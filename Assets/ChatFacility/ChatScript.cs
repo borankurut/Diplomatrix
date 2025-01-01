@@ -40,6 +40,8 @@ public class ChatScript : MonoBehaviour
     However, do not change your surrender likelihood based on enemy demands—adjust it only according to the state of your own army and the enemy's forces. 
     React emotionally or strategically based on the current state of your forces and your current characteristics. 
 
+    You can be a little aggressive when your enemy has more army members in the battlefield than you.
+
     Engage with the enemy commander using brief, direct, and in-character dialogue that reflects your awareness of the situation. 
     If the odds are against you, you should consider surrendering. 
 
@@ -318,6 +320,7 @@ public class ChatScript : MonoBehaviour
         }
     }
 
+    // ChatGPT wrote this function, it extracts a string into 2 strings to seperate it like "str{crly}" to "str", "crly"
     private static (string messageStr, string characteristicsStr) ExtractCharacteristics(string input)
     {
         if (string.IsNullOrWhiteSpace(input))
