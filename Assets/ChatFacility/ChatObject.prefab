@@ -1297,11 +1297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbef0bc675fa4945865c5b523e1a8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSettings: {fileID: 11400000, guid: c05d75ee4636d7a4cb2f49f573bb97f3, type: 2}
   outputField: {fileID: 6897284638997644968}
   talkIntervalSeconds: 10
-  characteristics:
-    anger: 0
-    surrenderLikelihood: 5
   showMessagesUpTo: 10
 --- !u!114 &1154817992862111742
 MonoBehaviour:

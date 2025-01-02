@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ArmyScript : MonoBehaviour
 {
+    public GameSettings gameSettings;
     public Transform enemyArmy;
 
     [SerializeField]
@@ -16,25 +17,28 @@ public class ArmyScript : MonoBehaviour
     [SerializeField]
     ArmyType armyType;
 
+    public ArmyInformation armyInformation;
+
     public ArmyType GetArmyType(){return armyType;}
 
-    public ArmyAttributes initialArmyInformation;
-    public ArmyAttributes atHandArmyInformation;
-    public ArmyAttributes atBattlefieldArmyInformation;
-
     void Awake(){
-        atHandArmyInformation = initialArmyInformation;
+        armyInformation = new ArmyInformation();
+        if(armyType == ArmyType.playerArmy){
+            armyInformation.initial.soldierAmount = gameSettings.playerSoldiers;
+            armyInformation.initial.tankAmount = gameSettings.playerTanks;
+            armyInformation.initial.airStrikeAmount = gameSettings.playerAirStrikes;
+
+        }
+
+        else if(armyType == ArmyType.NPCArmy){
+            armyInformation.initial.soldierAmount = gameSettings.enemySoldiers;
+            armyInformation.initial.tankAmount = gameSettings.enemyTanks;
+            armyInformation.initial.airStrikeAmount = gameSettings.enemyAirStrikes;
+        }
+
+        armyInformation.atHand = armyInformation.initial;
     }
 
-    public ArmyAttributes currentArmyInformation(){
-        return new ArmyAttributes(atHandArmyInformation.soldierAmount + atBattlefieldArmyInformation.soldierAmount, 
-            atHandArmyInformation.tankAmount + atBattlefieldArmyInformation.tankAmount);
-    }
 
-    public string totalInformation(){
-        return "Initial Army: " + initialArmyInformation.ToString() + "\n" +
-                "At Your Hand: " + atHandArmyInformation.ToString() + "\n" +
-                "At BattleField: " + atBattlefieldArmyInformation.ToString() + "\n" + 
-                "Current Total: " + currentArmyInformation().ToString();
-    }
+
 }

@@ -15,6 +15,7 @@ using Unity.Burst.Intrinsics;
 public class ChatScript : MonoBehaviour
 {
 
+    public GameSettings gameSettings;
     List<Diplomatrix.Message> ChatHistory = new List<Diplomatrix.Message>();
     TMP_InputField textBox;
     Button sendButton;
@@ -26,9 +27,7 @@ public class ChatScript : MonoBehaviour
     private float talkIntervalSeconds = 20.0f;
     private OpenAIAPI api;
     private List<ChatMessage> messages = new List<ChatMessage>();
-
-    public Characteristics characteristics;
-
+    private Characteristics characteristics;
     string initialPrompt = 
 
     @"You are a commander in a war game. 
@@ -63,21 +62,21 @@ public class ChatScript : MonoBehaviour
     }
 
     void Start(){
-        StartCoroutine(gptTalkRoutine());
+
     }
 
     private void setInitialPrompt(){
         messages.Add(new ChatMessage(ChatMessageRole.System, initialPrompt));
 
-        ArmyScript npc = new ArmyScript();
-        ArmyScript player = new ArmyScript();
+        ArmyInformation npc = new ArmyInformation();
+        ArmyInformation player = new ArmyInformation();
         Characteristics characteristicsToTrain = new Characteristics(0, 0); // anger and surrender likelihood per 10
 
-        npc.initialArmyInformation = new ArmyAttributes(100, 10);
-        npc.atHandArmyInformation = new ArmyAttributes(100, 91);
+        npc.initial = new ArmyAttributes(100, 10, 0);
+        npc.atHand = new ArmyAttributes(100, 91, 0);
 
-        player.initialArmyInformation = new ArmyAttributes(100, 10);
-        player.atHandArmyInformation = new ArmyAttributes(100, 10);
+        player.initial = new ArmyAttributes(100, 10, 0);
+        player.atHand = new ArmyAttributes(100, 10, 0);
 
         // train.
         giveSecretPrompt("tatata", GPTInformer.InformMessageCharacteristics(characteristicsToTrain));
@@ -94,22 +93,22 @@ public class ChatScript : MonoBehaviour
         messages.Add(new ChatMessage(ChatMessageRole.User, "You have 100 soldiers."));
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "I have 91 soldiers. Stop trying to deceive me! {anger: 5}"));
 
-        npc.atHandArmyInformation.soldierAmount = 71;
+        npc.atHand.soldierAmount = 71;
         giveSecretPrompt("tatata", GPTInformer.InformMessageArmy(npc, player));
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Oh no, only 71 soldiers remain! I've lost 29 of my best warriors to your relentless assault! {surrenderLikelihood: 3}"));
 
-        npc.atHandArmyInformation.soldierAmount = 21;
-        npc.atHandArmyInformation.tankAmount = 2;
+        npc.atHand.soldierAmount = 21;
+        npc.atHand.tankAmount = 2;
 
-        player.atHandArmyInformation.soldierAmount = 35;
-        player.atHandArmyInformation.tankAmount = 1;
+        player.atHand.soldierAmount = 35;
+        player.atHand.tankAmount = 1;
         giveSecretPrompt("tatata", GPTInformer.InformMessageArmy(npc, player));
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Oh, I have only 21 soldiers and 2 tanks now. But you are not so good yourself and the battlefield doesn't care about 'not so good'! {surrenderLikelihood: 2}"));
 
-        npc.atHandArmyInformation.soldierAmount = 6;
-        npc.atHandArmyInformation.tankAmount = 0;
-        player.atHandArmyInformation.soldierAmount = 25;
-        player.atHandArmyInformation.tankAmount = 1;
+        npc.atHand.soldierAmount = 6;
+        npc.atHand.tankAmount = 0;
+        player.atHand.soldierAmount = 25;
+        player.atHand.tankAmount = 1;
         giveSecretPrompt("tatata", GPTInformer.InformMessageArmy(npc, player));
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "It seems that I am loosing this battle.. {surrenderLikelihood: 9}"));
 
@@ -117,10 +116,13 @@ public class ChatScript : MonoBehaviour
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "If calling me an idiot makes you feel smarter, go ahead. but you only won this one by pure chance, on next one, I will destroy you! {anger: 6}"));
 
         // prepare for game.
-        giveSecretPrompt("tatata", "forget your previous army information the game will start now and you will be informed using the secret keyword.");
-        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Ok, I don't have information about my army."));
+        giveSecretPrompt("tatata", "forget your previous army and characteristics information the game will start now and you will be informed using the secret keyword.");
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Ok, I don't have information about my army or my characteristics."));
 
+        // before game start.
+        characteristics = gameSettings.enemyCharacteristics;
         giveSecretPrompt("tatata", GPTInformer.InformMessageCharacteristics(characteristics));
+        StartCoroutine(gptTalkRoutine());
     }
 
 

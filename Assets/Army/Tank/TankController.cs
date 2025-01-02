@@ -87,7 +87,7 @@ public class TankController : ArmyMemberController
     protected override void die()
     {
         smokeParticle.Play();
-        thisArmy.atBattlefieldArmyInformation.tankAmount -= 1;
+        thisArmy.armyInformation.atBattlefield.tankAmount -= 1;
         base.die();
     }
 }

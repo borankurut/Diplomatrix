@@ -7,14 +7,14 @@ namespace Diplomatrix{
     [System.Serializable]
     public struct ArmyAttributes 
     {
-        public ArmyAttributes(int soldierAmount, int tankAmount){
+        public ArmyAttributes(int soldierAmount, int tankAmount, int airStrikeAmount){
             this.soldierAmount = soldierAmount;
             this.tankAmount = tankAmount;
+            this.airStrikeAmount = airStrikeAmount;
         }
         public int soldierAmount;
         public int tankAmount;
-        
-        // other stuff, later.
+        public int airStrikeAmount;
         public override string ToString(){
             return $"(riffle men: {soldierAmount}, tanks: {tankAmount})";
         }

@@ -57,26 +57,26 @@ public class PutHandler : MonoBehaviour
 
         if(selection == Selection.Soldier){
 
-            if(army.atHandArmyInformation.soldierAmount <= 0)
+            if(army.armyInformation.atHand.soldierAmount <= 0)
                 return;
 
             GameObject addedSoldier = Instantiate(soldierPrefab);
             addedSoldier.transform.position = position;
             addedSoldier.transform.SetParent(army.transform, true);
-            army.atHandArmyInformation.soldierAmount -= 1;
-            army.atBattlefieldArmyInformation.soldierAmount += 1;
+            army.armyInformation.atHand.soldierAmount -= 1;
+            army.armyInformation.atBattlefield.soldierAmount += 1;
         }
 
         else if(selection == Selection.Tank){
 
-            if(army.atHandArmyInformation.tankAmount <= 0)
+            if(army.armyInformation.atHand.tankAmount <= 0)
                 return;
 
             GameObject addedTank = Instantiate(tankPrefab);
             addedTank.transform.position = position;
             addedTank.transform.SetParent(army.transform, true);
-            army.atHandArmyInformation.tankAmount-= 1;
-            army.atBattlefieldArmyInformation.tankAmount+= 1;
+            army.armyInformation.atHand.tankAmount-= 1;
+            army.armyInformation.atBattlefield.tankAmount+= 1;
         }
 
         Debug.Log("Trying to put " + SelectionToString(selection) + " here: " + position);

@@ -34,8 +34,13 @@ public class GPTInformer : MonoBehaviour
     }
 
     static public string InformMessageArmy(ArmyScript npcArmy, ArmyScript playerArmy){
-        string informMessage = "Your army information: " + npcArmy.totalInformation()+
-                        "\n\n" + "Enemy army information: " + playerArmy.totalInformation();
+        string informMessage = "Your army information: " + npcArmy.armyInformation.totalInformation()+
+                        "\n\n" + "Enemy army information: " + playerArmy.armyInformation.totalInformation();
+        return informMessage;
+    }
+    static public string InformMessageArmy(ArmyInformation npcArmyInformation, ArmyInformation playerArmyInformation){
+        string informMessage = "Your army information: " + npcArmyInformation.totalInformation()+
+                        "\n\n" + "Enemy army information: " + playerArmyInformation.totalInformation();
         return informMessage;
     }
 

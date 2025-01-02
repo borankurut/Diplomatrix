@@ -42,11 +42,11 @@ public class PlayerPutHandler : PutHandler
             return;
         }
 
-        if(selection == Selection.Tank && playerArmy.atHandArmyInformation.tankAmount <= 0){
+        if(selection == Selection.Tank && playerArmy.armyInformation.atHand.tankAmount <= 0){
             Debug.Log("Not enough tanks");
             return;
         }
-        else if(selection == Selection.Soldier && playerArmy.atHandArmyInformation.soldierAmount <= 0){
+        else if(selection == Selection.Soldier && playerArmy.armyInformation.atHand.soldierAmount <= 0){
             Debug.Log("Not enough soldiers");
             return;
         }
