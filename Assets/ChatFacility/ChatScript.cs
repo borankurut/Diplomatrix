@@ -24,6 +24,9 @@ public class ChatScript : MonoBehaviour
     TMP_Text outputField;
 
     [SerializeField]
+    TMP_Text aggressivenessText;
+
+    [SerializeField]
     private float talkIntervalSeconds = 20.0f;
     private OpenAIAPI api;
     private List<ChatMessage> messages = new List<ChatMessage>();
@@ -66,6 +69,10 @@ public class ChatScript : MonoBehaviour
         characteristics = gameSettings.enemyCharacteristics;
         giveSecretPrompt("tatata", GPTInformer.InformMessageCharacteristics(characteristics));
         StartCoroutine(gptTalkRoutine());
+    }
+
+    private void afterResponse(){
+        aggressivenessText.text = characteristics.anger.ToString();
     }
 
     private void setInitialPrompt(){
@@ -116,7 +123,7 @@ public class ChatScript : MonoBehaviour
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "It seems that I am loosing this battle.. {surrenderLikelihood: 9}"));
 
         messages.Add(new ChatMessage(ChatMessageRole.User, "Are you idiot?"));
-        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "If calling me an idiot makes you feel smarter, go ahead. but you only won this one by pure chance, on next one, I will destroy you! {anger: 6}"));
+        messages.Add(new ChatMessage(ChatMessageRole.Assistant, "How come you call me an idiot, you idiot? You only won this one by pure chance, on next one, I will destroy you! {anger: 7}"));
 
         // prepare for game.
         giveSecretPrompt("tatata", "forget your previous army and characteristics information the game will start now and you will be informed using the secret keyword.");
@@ -245,6 +252,8 @@ public class ChatScript : MonoBehaviour
 
         sendButton.interactable = true;
         fillOutputField(showMessagesUpTo);
+
+        afterResponse();
     }
 
     private async void getResponse(){
@@ -270,6 +279,7 @@ public class ChatScript : MonoBehaviour
 
         sendButton.interactable = true;
         fillOutputField(showMessagesUpTo);
+        afterResponse();
     }
 
     private void UpdateCharacteristics(string characteristicsStr){

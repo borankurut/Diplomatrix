@@ -635,18 +635,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1310141076}
     m_Modifications:
-    - target: {fileID: 97098372233359683, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 97098372233359683, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 97098372233359683, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1154817992862111742, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
       propertyPath: npcArmy
       value: 
@@ -655,22 +643,6 @@ PrefabInstance:
       propertyPath: playerArmy
       value: 
       objectReference: {fileID: 857498575}
-    - target: {fileID: 1279841056711151300, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: talkIntervalSeconds
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 2583433573338803122, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2583433573338803122, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2583433573338803122, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2921522764266907746, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -766,18 +738,6 @@ PrefabInstance:
     - target: {fileID: 6498259846275699571, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6897284638997644968, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_fontColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6897284638997644968, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_fontColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6897284638997644968, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
-      propertyPath: m_fontColor.r
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
