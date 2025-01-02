@@ -62,7 +62,10 @@ public class ChatScript : MonoBehaviour
     }
 
     void Start(){
-
+        // before game start.
+        characteristics = gameSettings.enemyCharacteristics;
+        giveSecretPrompt("tatata", GPTInformer.InformMessageCharacteristics(characteristics));
+        StartCoroutine(gptTalkRoutine());
     }
 
     private void setInitialPrompt(){
@@ -118,11 +121,6 @@ public class ChatScript : MonoBehaviour
         // prepare for game.
         giveSecretPrompt("tatata", "forget your previous army and characteristics information the game will start now and you will be informed using the secret keyword.");
         messages.Add(new ChatMessage(ChatMessageRole.Assistant, "Ok, I don't have information about my army or my characteristics."));
-
-        // before game start.
-        characteristics = gameSettings.enemyCharacteristics;
-        giveSecretPrompt("tatata", GPTInformer.InformMessageCharacteristics(characteristics));
-        StartCoroutine(gptTalkRoutine());
     }
 
 
