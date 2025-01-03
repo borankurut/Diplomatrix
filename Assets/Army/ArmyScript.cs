@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Diplomatrix;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ public class ArmyScript : MonoBehaviour
     [SerializeField]
     ArmyType armyType;
 
+    [SerializeField] 
+    TMP_Text textValues; 
     public ArmyInformation armyInformation;
 
     public ArmyType GetArmyType(){return armyType;}
@@ -39,6 +42,26 @@ public class ArmyScript : MonoBehaviour
         armyInformation.atHand = armyInformation.initial;
     }
 
+    void Update(){
+        textValues.text = ValuesAtHand();
+    }
+
+    private string ValuesAtHand(){
+        string toReturn = "";
+        if(armyType == ArmyType.NPCArmy){
+            toReturn += "Enemy";
+        }
+        else if(armyType == ArmyType.playerArmy){
+            toReturn += "Player";
+        }
+        else{
+            toReturn += "Null";
+        }
+        toReturn += "\n  Soldiers:" + armyInformation.atHand.soldierAmount.ToString();
+        toReturn += "\n  Tanks:" + armyInformation.atHand.tankAmount.ToString();
+        toReturn += "\n  Airstrikes:" + armyInformation.atHand.airStrikeAmount.ToString();
+        return toReturn;
+    }
 
 
 }

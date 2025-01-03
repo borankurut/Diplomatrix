@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a2f33c8f8c767448c3af295df9773a, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  playerSoldiers: 0
-  playerTanks: 0
-  playerAirforces: 0
-  enemySoldiers: 0
-  enemyTanks: 0
-  enemyAirforces: 0
-  enemyAggressiveness: 0
+  playerSoldiers: 40
+  playerTanks: 10
+  playerAirStrikes: 40
+  enemySoldiers: 40
+  enemyTanks: 10
+  enemyAirStrikes: 40
+  enemyCharacteristics:
+    anger: 1
+    surrenderLikelihood: 1

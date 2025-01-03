@@ -10,7 +10,10 @@ public class EnemyPutHandler : PutHandler
     [SerializeField]
     ArmyScript playerArmy;      // maybe look locations of player army to find good positions?
 
+    [SerializeField]
+    ChatScript chatScript;
     public Diplomatrix.AttackPattern attackPattern = new Diplomatrix.AttackPattern(1, 10, 10);
+    
     void Awake(){
 
     }
@@ -22,7 +25,7 @@ public class EnemyPutHandler : PutHandler
     }
     void Update()
     {
-        
+        attackPattern.setAggressiveness(chatScript.GetCharacteristics().anger);
     }
 
     private IEnumerator PutSoldierRoutine(){

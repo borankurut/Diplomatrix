@@ -72,7 +72,8 @@ public class ChatScript : MonoBehaviour
     }
 
     private void afterResponse(){
-        aggressivenessText.text = characteristics.anger.ToString();
+        aggressivenessText.text = "Aggressiveness: " + characteristics.anger.ToString();
+        aggressivenessText.text += "\nSurrender Likelihood: " + characteristics.surrenderLikelihood.ToString();
     }
 
     private void setInitialPrompt(){
@@ -367,5 +368,9 @@ public class ChatScript : MonoBehaviour
 
         // Debug.Log($"Extracted Message:\nWithout Curly: \"{withoutCurly}\"\nInside Curly: \"{insideCurly}\"");
         return (withoutCurly, $"{{{insideCurly}}}");
+    }
+
+    public Characteristics GetCharacteristics(){
+        return characteristics;
     }
 }
