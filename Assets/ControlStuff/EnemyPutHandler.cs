@@ -12,7 +12,6 @@ public class EnemyPutHandler : PutHandler
 
     [SerializeField]
     ChatScript chatScript;
-    public Diplomatrix.AttackPattern attackPattern = new Diplomatrix.AttackPattern(1, 10, 10);
     
     void Awake(){
 
@@ -31,7 +30,6 @@ public class EnemyPutHandler : PutHandler
     private IEnumerator PutSoldierRoutine(){
         while(true){
             Put(Selection.Soldier, terrainGrids.GetRandomValidPointForEnemy(), enemyArmy);
-            Debug.Log("attackperiod soldier: " + attackPattern.getSoldierAttackPeriod());
             yield return new WaitForSeconds(attackPattern.getSoldierAttackPeriod());
         }
     }

@@ -55,6 +55,11 @@ public class ChatScript : MonoBehaviour
 
     private bool playerTalkedBeforeTalkIntervalSeconds = false;
 
+    [SerializeField]
+    GPTInformer gptInformer;
+
+    private string previousInformationMessage;
+
     void Awake()
     {
         getObjects();
@@ -70,10 +75,33 @@ public class ChatScript : MonoBehaviour
         giveSecretPrompt("tatata", GPTInformer.InformMessageCharacteristics(characteristics));
         StartCoroutine(gptTalkRoutine());
     }
+    void Update(){
+        if(textBox.isFocused){
+            Time.timeScale = 0.01f;
+        }
+        else{
+            Time.timeScale = 1.0f;   
+        }
+
+        if(Input.GetKeyDown(KeyCode.T)){
+            textBox.Select();
+        }
+    }
 
     private void afterResponse(){
         aggressivenessText.text = "Aggressiveness: " + characteristics.anger.ToString();
         aggressivenessText.text += "\nSurrender Likelihood: " + characteristics.surrenderLikelihood.ToString();
+    }
+
+    private void beforeResponse(){
+        string current = gptInformer.CurrentInformationMessage();
+        if(current == previousInformationMessage){
+            return;
+        }
+        else{
+            giveSecretPrompt("tatata", current);
+            previousInformationMessage = current;
+        }
     }
 
     private void setInitialPrompt(){
@@ -223,6 +251,7 @@ public class ChatScript : MonoBehaviour
     }
 
     private async void getResponse(string lastPrompt){
+        beforeResponse();
         playerTalkedBeforeTalkIntervalSeconds = true;
 
         sendButton.interactable = false;
@@ -258,6 +287,7 @@ public class ChatScript : MonoBehaviour
     }
 
     private async void getResponse(){
+        beforeResponse();
         sendButton.interactable = false;
 
         var chatResult = await api.Chat.CreateChatCompletionAsync(new ChatRequest()

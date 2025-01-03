@@ -38,5 +38,8 @@ namespace Diplomatrix{
         public void setAggressiveness(int aggressiveness){
             this.aggressiveness = Math.Clamp(aggressiveness / aggressivenessDivider, 1, 10);
         }
+        public int getAggresiveness(){
+            return this.aggressiveness;
+        }
     }
 }
