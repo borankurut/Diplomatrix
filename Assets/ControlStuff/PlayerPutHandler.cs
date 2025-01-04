@@ -94,15 +94,15 @@ public class PlayerPutHandler : PutHandler
     }
 
     public int getSoldierStack(){
-        return stacks.soldier;
+        return Math.Min(stacks.soldier, playerArmy.armyInformation.atHand.soldierAmount);
     }
     
     public int getTankStack(){
-        return stacks.tank;
+        return Math.Min(stacks.tank, playerArmy.armyInformation.atHand.tankAmount);
     }
     
     public int getAirstrikeStack(){
-        return stacks.airStrike;
+        return Math.Min(stacks.airStrike, playerArmy.armyInformation.atHand.airStrikeAmount);
     }
 
 }
