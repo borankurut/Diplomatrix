@@ -76,6 +76,7 @@ public class TankController : ArmyMemberController
         GameObject projectile = Instantiate(projectilePrefab, projectileStartTransform.position, projectileStartTransform.rotation);
         projectile.GetComponent<TankProjectileScript>().damage = thisArmyMember.Damage;
         projectile.GetComponent<TankProjectileScript>().enemyArmy = thisArmy.enemyArmy;
+        projectile.GetComponent<TankProjectileScript>().thisArmy = thisArmy.transform;
         
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb != null)

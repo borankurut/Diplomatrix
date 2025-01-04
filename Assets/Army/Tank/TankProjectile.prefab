@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7112312316648087701}
   - component: {fileID: 8941400086640338184}
   - component: {fileID: 305795267272111360}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyArmy: {fileID: 0}
+  thisArmy: {fileID: 0}
   damage: 400
   radius: 2
   explosionParticle: {fileID: 9191317014818155022}
@@ -117,7 +118,7 @@ GameObject:
   - component: {fileID: 2470823121102557363}
   - component: {fileID: 5898305010076538043}
   - component: {fileID: 412620919398535878}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankBulletModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,13 +202,29 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2318280449741704957, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2732520812153707804, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3326351027860958676, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3572720787432247795, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3983859732853001794, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480529259576055725, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4721617541157967987, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
       propertyPath: playOnAwake
@@ -216,6 +233,10 @@ PrefabInstance:
     - target: {fileID: 5162910912013668194, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
       propertyPath: m_Name
       value: vfxExplosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162910912013668194, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5444105318733727396, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
       propertyPath: playOnAwake
@@ -277,9 +298,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6472086075581286689, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8022887235370566557, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479037946392389870, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8510212568045327394, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9023844844338963842, guid: cf82839c411151342a7b2337bda9fb34, type: 3}
       propertyPath: playOnAwake
@@ -308,6 +341,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4860211660212951912}
     m_Modifications:
+    - target: {fileID: 2491576256362421057, guid: f78aaaec3b393e24ca74cd6de8194347, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2540689484080606321, guid: f78aaaec3b393e24ca74cd6de8194347, type: 3}
       propertyPath: looping
       value: 0
@@ -319,6 +356,18 @@ PrefabInstance:
     - target: {fileID: 3077343761403282166, guid: f78aaaec3b393e24ca74cd6de8194347, type: 3}
       propertyPath: m_Name
       value: vfxImpact
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077343761403282166, guid: f78aaaec3b393e24ca74cd6de8194347, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3987749403610019982, guid: f78aaaec3b393e24ca74cd6de8194347, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5376181070979290840, guid: f78aaaec3b393e24ca74cd6de8194347, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5521277632010768499, guid: f78aaaec3b393e24ca74cd6de8194347, type: 3}
       propertyPath: m_LocalScale.x

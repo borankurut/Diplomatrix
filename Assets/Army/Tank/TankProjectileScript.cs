@@ -5,6 +5,7 @@ using UnityEngine;
 public class TankProjectileScript : MonoBehaviour
 {
     public Transform enemyArmy;
+    public Transform thisArmy;
     public int damage;
 
     [SerializeField]
@@ -49,11 +50,11 @@ public class TankProjectileScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        bool isEnemy = other.transform.IsChildOf(enemyArmy);
-        ArmyMember armyMember = other.GetComponent<ArmyMember>();
+        bool isFriend = other.transform.IsChildOf(thisArmy);
 
-        if (isEnemy && !explosionCollider.enabled && armyMember && !armyMember.IsDead)
+        if (!isFriend && !explosionCollider.enabled)
         {
+            Debug.Log(other.name);
             explosionCollider.enabled = true;
             explosionParticle.Play();
             impactParticle.Play();
@@ -68,6 +69,7 @@ public class TankProjectileScript : MonoBehaviour
             Destroy(gameObject, 8.0f);
         }
 
+        ArmyMember armyMember = other.GetComponent<ArmyMember>();
         if (explosionCollider.enabled && other.transform.IsChildOf(enemyArmy) && !alreadyDamaged.Contains(other))
         {
             if (armyMember != null)
