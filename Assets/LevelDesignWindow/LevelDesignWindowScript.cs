@@ -59,6 +59,6 @@ public class LevelDesignWindowScript : MonoBehaviour
         Debug.Log(gameSettings);
 
         // Load the game scene TODO
-        UnityEngine.SceneManagement.SceneManager.LoadScene("PutTestMap");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Combined");
     }
 }

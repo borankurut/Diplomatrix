@@ -26,8 +26,26 @@ public class BarsHandlerScript : MonoBehaviour
 
     [SerializeField]
     TMP_Text airstrikeStackCount;
+
+    [SerializeField]
+    ArmyScript playerArmy;
+
+    [SerializeField]
+    ArmyScript enemyArmy;
+
+    [SerializeField] 
+    TMP_Text textValuesPlayer; 
+
+    [SerializeField] 
+    TMP_Text textValuesEnemy; 
+
+
+
     void Update()
     {
+        textValuesPlayer.text = ValuesAtHand(playerArmy);
+        textValuesEnemy.text = ValuesAtHand(enemyArmy);
+
         soldierSlider.value = Mathf.Clamp01(playerPutHandler.SoldierReadyRatio());
         tankSlider.value = Mathf.Clamp01(playerPutHandler.TankReadyRatio());
         airstrikeSlider.value = Mathf.Clamp01(playerPutHandler.AirstrikeReadyRatio());
@@ -52,5 +70,21 @@ public class BarsHandlerScript : MonoBehaviour
         else{
             airstrikeStackCount.text = "x" + playerPutHandler.getAirstrikeStack().ToString();
         }
+    }
+    private string ValuesAtHand(ArmyScript army){
+        string toReturn = "";
+        if(army.GetArmyType() == ArmyScript.ArmyType.NPCArmy){
+            toReturn += "Enemy";
+        }
+        else if(army.GetArmyType() == ArmyScript.ArmyType.playerArmy){
+            toReturn += "Player";
+        }
+        else{
+            toReturn += "Null";
+        }
+        toReturn += "\n  Soldiers:" + army.armyInformation.atHand.soldierAmount.ToString();
+        toReturn += "\n  Tanks:" + army.armyInformation.atHand.tankAmount.ToString();
+        toReturn += "\n  Airstrikes:" + army.armyInformation.atHand.airStrikeAmount.ToString();
+        return toReturn;
     }
 }

@@ -24,7 +24,10 @@ public class EnemyPutHandler : PutHandler
     }
     void Update()
     {
-        attackPattern.setAggressiveness(chatScript.GetCharacteristics().anger);
+        if(chatScript != null){
+            attackPattern.setAggressiveness(chatScript.GetCharacteristics().anger);
+        }
+
     }
 
     private IEnumerator PutSoldierRoutine(){
@@ -43,6 +46,15 @@ public class EnemyPutHandler : PutHandler
 
     private IEnumerator PutAirAttackRoutine(){
         while(true){
+            while(playerArmy.transform.childCount < 5){
+                yield return new WaitForSeconds(1.0f);      // don't throw because it is unnecessary.
+            }
+
+            int enemyIx = Random.Range(0, playerArmy.transform.childCount); // get a random index
+            Vector3 randomPlayerMemberPosition = playerArmy.transform.GetChild(enemyIx).position;
+            randomPlayerMemberPosition.y = 0;
+            Put(Selection.Airstrike, randomPlayerMemberPosition, enemyArmy);
+
             Debug.Log("PUT AIR ATTACK CALLED.");
             yield return new WaitForSeconds(attackPattern.getAirAttackPeriod());
         }

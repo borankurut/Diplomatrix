@@ -24,7 +24,13 @@ public class ChatScript : MonoBehaviour
     TMP_Text outputField;
 
     [SerializeField]
-    TMP_Text aggressivenessText;
+    Scrollbar scrollbarViewport;
+
+    [SerializeField]
+    float autoScrollSpeed;
+
+    [SerializeField]
+    TMP_Text characteristicsText;
 
     [SerializeField]
     private float talkIntervalSeconds = 20.0f;
@@ -39,10 +45,12 @@ public class ChatScript : MonoBehaviour
     Treat the details provided after 'tatata' in parentheses as the true state of your forces, including both past and present conditions. 
 
     You will now be informed about your characteristics. While the battle is ongoing, you can change some of your characteristics by adding new values in brackets at the end of your message. 
-    However, do not change your surrender likelihood based on enemy demands—adjust it only according to the state of your own army and the enemy's forces. 
-    React emotionally or strategically based on the current state of your forces and your current characteristics. 
+    However, do not change your surrender likelihood based on enemy demands but if the enemy is trying to convince you and if your chances are low based on your own army and the enemy's forces, consider increasing it. 
+    React emotionally based on the current state of your forces and your current characteristics. 
 
     You can be a little aggressive when your enemy has more army members in the battlefield than you.
+
+    Talk angrily when your anger is high and talk in disbelief when your surrender likelihood is high. If you have no airforce attacks and the enemy is winning on the battlefield, then your chances are low, so increase the surrender likelihood.
 
     Engage with the enemy commander using brief, direct, and in-character dialogue that reflects your awareness of the situation. 
     If the odds are against you, you should consider surrendering. 
@@ -59,6 +67,7 @@ public class ChatScript : MonoBehaviour
     GPTInformer gptInformer;
 
     private string previousInformationMessage;
+    private bool scrollBarIsLerping = false;
 
     void Awake()
     {
@@ -86,11 +95,19 @@ public class ChatScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T)){
             textBox.Select();
         }
+
+        if(scrollBarIsLerping){
+            scrollbarViewport.value = Mathf.Lerp(scrollbarViewport.value, 0f, autoScrollSpeed * Time.deltaTime);
+        }
+        if(scrollbarViewport.value == 0){
+            scrollBarIsLerping = false;
+        }
     }
 
     private void afterResponse(){
-        aggressivenessText.text = "Aggressiveness: " + characteristics.anger.ToString();
-        aggressivenessText.text += "\nSurrender Likelihood: " + characteristics.surrenderLikelihood.ToString();
+        characteristicsText.text = "Aggressiveness: " + characteristics.anger.ToString();
+        characteristicsText.text += "\nSurrender Likelihood: " + characteristics.surrenderLikelihood.ToString();
+        scrollBarIsLerping = true;
     }
 
     private void beforeResponse(){

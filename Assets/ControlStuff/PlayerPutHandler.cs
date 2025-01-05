@@ -36,6 +36,12 @@ public class PlayerPutHandler : PutHandler
             Debug.Log("TWO IS PRESSED, Tank is selected.");
             selection = Selection.Tank;
         }
+
+        if(Input.GetKeyDown(KeyCode.Alpha3)){
+            Debug.Log("THREE IS PRESSED, Airstrike is selected.");
+            selection = Selection.Airstrike;
+        }
+
         //Debug.Log($"Ready ratios: soldier{SoldierReadyRatio()}, tank:{TankReadyRatio()}, air:{AirstrikeReadyRatio()}");
         //Debug.Log($"Stacks: soldier:{stacks.soldier}, tank:{stacks.tank}, air:{stacks.airStrike}");
     }

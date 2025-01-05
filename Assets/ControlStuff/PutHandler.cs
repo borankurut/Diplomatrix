@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Diplomatrix;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PutHandler : MonoBehaviour
@@ -21,13 +24,16 @@ public class PutHandler : MonoBehaviour
         public float airStrike;
     }
 
-    public AttackPattern attackPattern = new AttackPattern(5, 60, 60);
+    public AttackPattern attackPattern = new AttackPattern(5, 10, 20);
 
     [SerializeField]
     GameObject soldierPrefab;
 
     [SerializeField]
     GameObject tankPrefab;
+
+    [SerializeField]
+    GameObject airstrikePrefab;
     protected Stacks stacks = new Stacks();
     protected LastPrepareTimes lastPrepareTimes = new LastPrepareTimes();
 
@@ -59,24 +65,20 @@ public class PutHandler : MonoBehaviour
             return "Tank";
         }
         else if(selection == Selection.Airstrike){
-            return "Tank";
+            return "Airstrike";
         }
 
         return "NULL";
     }
 
     protected void Put(Selection selection, Vector3 position, ArmyScript army){
-        if(army.GetArmyType() == ArmyScript.ArmyType.playerArmy && 
-            !terrainGrids.IsValidInsidePlayerSide(position))
-        {
-            Debug.Log("Player is trying to put somewhere outside the map.");
-            return;
-        }
+        bool isValidPlace = selection == Selection.Airstrike && terrainGrids.IsValidCoordinate(position)                            ||
+                            army.GetArmyType() == ArmyScript.ArmyType.playerArmy && terrainGrids.IsValidInsidePlayerSide(position)  ||
+                            army.GetArmyType() == ArmyScript.ArmyType.NPCArmy && terrainGrids.IsValidInsideEnemySide(position);
 
-        if(army.GetArmyType() == ArmyScript.ArmyType.NPCArmy && 
-            !terrainGrids.IsValidInsideEnemySide(position))
-        {
-            Debug.Log("Enemy is trying to put somewhere outside the map.");
+        
+        if(!isValidPlace){
+            Debug.Log($"army type {(army.GetArmyType() == ArmyScript.ArmyType.playerArmy ? "player": "npc")} is trying to put something on invalid place");
             return;
         }
 
@@ -108,7 +110,17 @@ public class PutHandler : MonoBehaviour
 
             if(army.armyInformation.atHand.airStrikeAmount <= 0)
                 return;
-            Debug.Log("AIRSTRIKE PUT CALLED, TO BE IMPLEMENTED.");
+            // Debug.Log("AIRSTRIKE PUT CALLED, TO BE IMPLEMENTED.");
+
+
+            // GameObject projectile = Instantiate(projectilePrefab, projectileStartTransform.position, projectileStartTransform.rotation);
+            GameObject airstrike = Instantiate(airstrikePrefab, position + Vector3.up * 30.0f, quaternion.RotateX((float)Math.PI));
+            airstrike.GetComponent<AirstrikeScript>().enemyArmy = army.enemyArmy;
+            airstrike.GetComponent<AirstrikeScript>().thisArmy = army.transform;
+            airstrike.GetComponent<Rigidbody>().velocity = Vector3.down * 40.0f;
+            airstrike.transform.SetParent(army.transform, true);
+            army.armyInformation.atHand.airStrikeAmount -= 1;
+            army.armyInformation.atBattlefield.airStrikeAmount += 1;
         }
 
         // checks are valid, send unit.
@@ -169,7 +181,6 @@ public class PutHandler : MonoBehaviour
         while(true){
             stacks.airStrike++;
             lastPrepareTimes.airStrike = Time.time;
-            Debug.Log("PREPARE AIR ATTACK CALLED.");
             yield return new WaitForSeconds(attackPattern.getAirAttackPeriod());
         }
     }

@@ -81,7 +81,7 @@ public class TankController : ArmyMemberController
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.velocity = transform.forward * projectileVelocity;
+            rb.velocity = turret.forward * projectileVelocity;
         }
     }
 

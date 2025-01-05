@@ -29,7 +29,7 @@ public class TankProjectileScript : MonoBehaviour
 
     private HashSet<Collider> alreadyDamaged = new HashSet<Collider>();
 
-    void Start()
+    protected virtual void Start()
     {
         explosionCollider = gameObject.AddComponent<SphereCollider>();
         explosionCollider.isTrigger = true;
@@ -57,7 +57,11 @@ public class TankProjectileScript : MonoBehaviour
             Debug.Log(other.name);
             explosionCollider.enabled = true;
             explosionParticle.Play();
-            impactParticle.Play();
+
+            if(impactParticle){
+                impactParticle.Play();
+            }
+
             modelMeshRenderer.enabled = false;
 
             Collider mainCollider = GetComponent<Collider>();
@@ -66,7 +70,8 @@ public class TankProjectileScript : MonoBehaviour
                 mainCollider.enabled = false;
             }
             rb.isKinematic = true;
-            Destroy(gameObject, 8.0f);
+            Invoke("disableExplosion", 0.1f);
+            Destroy(gameObject, 1.5f);
         }
 
         ArmyMember armyMember = other.GetComponent<ArmyMember>();
@@ -85,5 +90,10 @@ public class TankProjectileScript : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    void disableExplosion(){
+        if (explosionCollider != null)
+            explosionCollider.enabled = false;
     }
 }

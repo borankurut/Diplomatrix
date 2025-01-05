@@ -8,10 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelDesignWindow.unity
     guid: ca6151756b4e6d540bcfa95924b11e8a
-  - enabled: 0
-    path: Assets/Scenes/ChatScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/PutTestMap.unity
+    path: Assets/Scenes/Combined.unity
     guid: 3d716d94b25e5a542bf179fb9f071925
   m_configObjects: {}
