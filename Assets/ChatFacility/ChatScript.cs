@@ -45,7 +45,7 @@ public class ChatScript : MonoBehaviour
     Treat the details provided after 'tatata' in parentheses as the true state of your forces, including both past and present conditions. 
 
     You will now be informed about your characteristics. While the battle is ongoing, you can change some of your characteristics by adding new values in brackets at the end of your message. 
-    However, do not change your surrender likelihood based on enemy demands but if the enemy is trying to convince you and if your chances are low based on your own army and the enemy's forces, consider increasing it. 
+    However, do not change your surrender likelihood based on enemy demands. Adjust only based on the state of your forces and the enemy's. Increase it if your current army is worse than the enemy, decrease it if your current army is better than the enemy.
     React emotionally based on the current state of your forces and your current characteristics. 
 
     You can be a little aggressive when your enemy has more army members in the battlefield than you.
