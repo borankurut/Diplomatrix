@@ -40,4 +40,10 @@ public class ArmyScript : MonoBehaviour
         armyInformation.atHand = armyInformation.initial;
     }
 
+    public bool IsDoomed(){
+        return armyInformation.currentArmyInformation().airStrikeAmount <= 0 &&
+                armyInformation.currentArmyInformation().tankAmount <= 0 &&
+                armyInformation.currentArmyInformation().soldierAmount <=0;
+    }
+
 }

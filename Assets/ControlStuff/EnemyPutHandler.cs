@@ -46,7 +46,7 @@ public class EnemyPutHandler : PutHandler
 
     private IEnumerator PutAirAttackRoutine(){
         while(true){
-            while(playerArmy.transform.childCount < 5){
+            while(playerArmy.transform.childCount < 5 && (playerArmy.armyInformation.atHand.tankAmount > 0 || playerArmy.armyInformation.atHand.soldierAmount > 0)){
                 yield return new WaitForSeconds(1.0f);      // don't throw because it is unnecessary.
             }
 

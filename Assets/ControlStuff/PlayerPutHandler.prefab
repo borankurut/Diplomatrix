@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGrids: {fileID: 0}
+  soldierPrefab: {fileID: 2375012575115367386, guid: e783d802aeb960643ab87cb1d2d1e5fe, type: 3}
+  tankPrefab: {fileID: 7695990043607609122, guid: fece5538ab5761c468dbf8e5f119955a, type: 3}
+  airstrikePrefab: {fileID: 7286011699226070897, guid: 779130425411dd04eb4c3a46739c2008, type: 3}
   playerArmy: {fileID: 0}
-  soldierPrefab: {fileID: 8442623690604886364, guid: b7bbbf4beb12c734f99c932d2e45a973, type: 3}
-  tankPrefab: {fileID: 7298143203796867058, guid: 88eaae1b3d66af54998cf7804e09cd60, type: 3}
+  enemyPutHandler: {fileID: 0}

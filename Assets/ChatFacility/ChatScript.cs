@@ -82,6 +82,7 @@ public class ChatScript : MonoBehaviour
         // before game start.
         characteristics = gameSettings.enemyCharacteristics;
         giveSecretPrompt("tatata", GPTInformer.InformMessageCharacteristics(characteristics));
+        giveSecretPrompt("tatata", "speak in this language from now on:" + gameSettings.language);
         StartCoroutine(gptTalkRoutine());
     }
     void Update(){

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FreeCameraController : MonoBehaviour
@@ -93,5 +94,9 @@ public class FreeCameraController : MonoBehaviour
             playerSideShower.SetActive(true);
             enemySideShower.SetActive(true);
         }
+    }
+    void OnDestroy(){
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

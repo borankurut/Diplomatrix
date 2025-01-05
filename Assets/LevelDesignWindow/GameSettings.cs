@@ -12,6 +12,7 @@ public class GameSettings : ScriptableObject
     public int enemyTanks;
     public int enemyAirStrikes;
     public Characteristics enemyCharacteristics;
+    public string language;
 
     public override string ToString()
     {
@@ -26,6 +27,8 @@ public class GameSettings : ScriptableObject
         sb.AppendLine($"Enemy Tanks: {enemyTanks}");
         sb.AppendLine($"Enemy Air Strikes: {enemyAirStrikes}");
         sb.AppendLine($"Enemy Aggressiveness: {enemyCharacteristics}");
+
+        sb.AppendLine($"Enemy Talk Language: {language}");
 
         return sb.ToString();
     }

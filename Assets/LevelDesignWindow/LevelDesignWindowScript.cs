@@ -36,9 +36,15 @@ public class LevelDesignWindowScript : MonoBehaviour
     [SerializeField]
     Button startButton;
 
+    [SerializeField]
+    Button languageButton;
+
+    private string language = "English";
+
     void Start(){
         aggressivenessSlider.onValueChanged.AddListener(UpdateAggressivenesText);
         startButton.onClick.AddListener(OnStartGame);
+        languageButton.onClick.AddListener(ChangeLanguage);
     }
 
     void UpdateAggressivenesText(float value){
@@ -55,10 +61,23 @@ public class LevelDesignWindowScript : MonoBehaviour
         gameSettings.enemyAirStrikes = int.Parse(enemyAirStrikesInput.text);
         gameSettings.enemyCharacteristics.anger = (int) aggressivenessSlider.value;
 
+        gameSettings.language = language;
+
         Debug.Log("Game settings Send:");
         Debug.Log(gameSettings);
 
         // Load the game scene TODO
         UnityEngine.SceneManagement.SceneManager.LoadScene("Combined");
+    }
+
+    void ChangeLanguage(){
+        if(language == "English"){
+            language = "Turkish";
+            languageButton.GetComponentInChildren<TMP_Text>().text = language;
+        }
+        else if(language == "Turkish"){
+            language = "English";
+            languageButton.GetComponentInChildren<TMP_Text>().text = language;
+        }
     }
 }
