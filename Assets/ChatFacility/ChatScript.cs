@@ -86,7 +86,7 @@ public class ChatScript : MonoBehaviour
     }
     void Update(){
         if(textBox.isFocused){
-            Time.timeScale = 0.01f;
+            Time.timeScale = 0.25f;
         }
         else{
             Time.timeScale = 1.0f;   

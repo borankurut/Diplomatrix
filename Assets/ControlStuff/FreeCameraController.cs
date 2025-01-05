@@ -16,18 +16,26 @@ public class FreeCameraController : MonoBehaviour
     [SerializeField]
     private Vector3 maxBounds = new Vector3(100f, 20f, 100f); // Maximum (x, y, z)
 
+    [SerializeField]
+    GameObject playerSideShower;
 
-    private Vector3 lastMousePosition;
+    [SerializeField]
+    GameObject enemySideShower;
+
+    private bool canMove = false;
 
     void Update()
     {
         HandleMovement();
         HandleRotation();
         ClampPosition();
+        HandleGridShowers();
     }
 
     void HandleMovement()
     {
+        if(!canMove)
+            return;
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveZ = Input.GetAxisRaw("Vertical");
         float moveY = 0;
@@ -43,6 +51,7 @@ public class FreeCameraController : MonoBehaviour
         if (Input.GetMouseButtonDown(1)){
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            canMove = true;
         }
 
         if (Input.GetMouseButton(1)){
@@ -59,6 +68,7 @@ public class FreeCameraController : MonoBehaviour
         if (Input.GetMouseButtonUp(1)){
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            canMove = false;
         }
     }
 
@@ -70,5 +80,18 @@ public class FreeCameraController : MonoBehaviour
         clampedPosition.y = Mathf.Clamp(clampedPosition.y, minBounds.y, maxBounds.y);
         clampedPosition.z = Mathf.Clamp(clampedPosition.z, minBounds.z, maxBounds.z);
         transform.position = clampedPosition;
+    }
+
+    void HandleGridShowers(){
+        if(canMove){
+            playerSideShower.GetComponent<SideScript>().deactivateAllActivePlanes();
+            enemySideShower.GetComponent<SideScript>().deactivateAllActivePlanes();
+            playerSideShower.SetActive(false);
+            enemySideShower.SetActive(false);
+        }
+        else{
+            playerSideShower.SetActive(true);
+            enemySideShower.SetActive(true);
+        }
     }
 }

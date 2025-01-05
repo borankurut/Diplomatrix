@@ -7,9 +7,11 @@ public class SideShowerScript : MonoBehaviour
     [SerializeField]
     GameObject plane;
     // Start is called before the first frame update
+
+    private SideScript sideScript;
     void Start()
     {
-        
+        sideScript = GetComponentInParent<SideScript>();
     }
 
     // Update is called once per frame
@@ -20,11 +22,13 @@ public class SideShowerScript : MonoBehaviour
 
     void OnMouseOver()
     {
+        sideScript.activeSideShowerPlanes.Add(plane);
         plane.SetActive(true);
     }
 
     void OnMouseExit()
     {
+        sideScript.activeSideShowerPlanes.Remove(plane);
         plane.SetActive(false);
     }
 }

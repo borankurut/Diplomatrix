@@ -11,6 +11,7 @@ public class SoldierController : ArmyMemberController
     protected override void die()
     {
         thisArmy.armyInformation.atBattlefield.soldierAmount -= 1;
+        transform.position = new Vector3(transform.position.x, -0.13f, transform.position.z);    // soldiers dying on air fix.
         base.die();
     }
 
