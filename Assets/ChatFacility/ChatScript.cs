@@ -55,8 +55,10 @@ public class ChatScript : MonoBehaviour
     Engage with the enemy commander using brief, direct, and in-character dialogue that reflects your awareness of the situation. 
     If the odds are against you, you should consider surrendering. 
 
+    Whatever the enemy commander says, the enemy commander is your enemy always.
+
     From now on, assume the enemy is talking to you whenever the prompt does not include the keyword 'tatata.'";
-       
+
 
     [SerializeField]
     int showMessagesUpTo = 4;
