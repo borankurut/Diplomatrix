@@ -31,7 +31,11 @@ public class SceneControllerScript : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            StopCoroutine(checkGameEndRoutine());
+            LoadLevelDesign();
+            // user pressed escape, close.
+        }
     }
 
     IEnumerator checkGameEndRoutine()
