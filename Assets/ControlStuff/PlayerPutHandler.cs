@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Diplomatrix;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerPutHandler : PutHandler 
 {
@@ -22,7 +23,7 @@ public class PlayerPutHandler : PutHandler
     {
         base.Update();
         this.attackPattern = enemyPutHandler.attackPattern;
-        if (Input.GetMouseButtonDown(0) && !Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !Input.GetMouseButton(1))
         {
             HandleClick();
         }

@@ -68,7 +68,7 @@ public class ArmyMemberController: MonoBehaviour
             handleState();
         }
 
-        else if(enemyTarget == null){
+        else if(enemyTarget == null || enemyTarget != closestTarget()){
             enemyTarget = closestTarget();
 
             state = State.Idle;
