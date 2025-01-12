@@ -48,8 +48,8 @@ public class BarsHandlerScript : MonoBehaviour
 
         // bars were counting when there is no units preparing, this is bad bad so temp fix.
         soldierSlider.value = playerArmy.armyInformation.atHand.soldierAmount == playerPutHandler.getSoldierStack() ? 0 : Mathf.Clamp01(playerPutHandler.SoldierReadyRatio());
-        tankSlider.value = playerArmy.armyInformation.atHand.tankAmount == playerPutHandler.getSoldierStack() ? 0 : Mathf.Clamp01(playerPutHandler.TankReadyRatio());
-        airstrikeSlider.value = playerArmy.armyInformation.atHand.airStrikeAmount == playerPutHandler.getSoldierStack() ? 0 : Mathf.Clamp01(playerPutHandler.AirstrikeReadyRatio());
+        tankSlider.value = playerArmy.armyInformation.atHand.tankAmount == playerPutHandler.getTankStack() ? 0 : Mathf.Clamp01(playerPutHandler.TankReadyRatio());
+        airstrikeSlider.value = playerArmy.armyInformation.atHand.airStrikeAmount == playerPutHandler.getAirstrikeStack() ? 0 : Mathf.Clamp01(playerPutHandler.AirstrikeReadyRatio());
 
         if(playerPutHandler.getSoldierStack() <= 0){
             soldierStackCount.text = "";
