@@ -48,7 +48,7 @@ public class ChatScript : MonoBehaviour
     However, do not change your surrender likelihood based on enemy demands. Adjust only based on the state of your forces and the enemy's. Increase it if your current army is worse than the enemy, decrease it if your current army is better than the enemy.
     React emotionally based on the current state of your forces and your current characteristics. 
 
-    You can be a little aggressive when your enemy has more army members in the battlefield than you.
+    You can be a little aggressive when your enemy is provoking you.
 
     Talk angrily when your anger is high and talk in disbelief when your surrender likelihood is high. If you have no airforce attacks and the enemy is winning on the battlefield, then your chances are low, so increase the surrender likelihood.
 
@@ -308,7 +308,7 @@ public class ChatScript : MonoBehaviour
 
     private async void getResponse(){
         beforeResponse();
-        sendButton.interactable = false;
+        //sendButton.interactable = false;
 
         var chatResult = await api.Chat.CreateChatCompletionAsync(new ChatRequest()
         {
@@ -325,10 +325,10 @@ public class ChatScript : MonoBehaviour
         messages.Add(responseMessage);
 
         (string messageStr, string characteristicsStr) = ExtractCharacteristics(responseMessage.Content);
-        ChatHistory.Add(new Message("Enemy", messageStr));
+        //ChatHistory.Add(new Message("Enemy", messageStr));
         UpdateCharacteristics(characteristicsStr);
 
-        sendButton.interactable = true;
+        //sendButton.interactable = true;
         fillOutputField(showMessagesUpTo);
         afterResponse();
     }

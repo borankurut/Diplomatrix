@@ -16,7 +16,7 @@ namespace Diplomatrix{
         public int tankAmount;
         public int airStrikeAmount;
         public override string ToString(){
-            return $"(riffle men: {soldierAmount}, tanks: {tankAmount})";
+            return $"(riffle men: {soldierAmount}, tanks: {tankAmount}, airstrikes: {airStrikeAmount})";
         }
     }
 }

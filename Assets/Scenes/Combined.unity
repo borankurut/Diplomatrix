@@ -517,6 +517,10 @@ PrefabInstance:
       propertyPath: playerArmy
       value: 
       objectReference: {fileID: 1245444999}
+    - target: {fileID: 1279841056711151300, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
+      propertyPath: talkIntervalSeconds
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2921522764266907746, guid: b4f468bd4bae33040929238522c2bf58, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
